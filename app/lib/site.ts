@@ -4,10 +4,14 @@
  */
 export const SITE_URL = "https://www.glasbazaporoko.si" as const;
 
-export const SITE_NAME = "Glasba za poroko – Barbara Zalaznik" as const;
+/** Domena kot blagovna znamka (OG siteName, publisher). */
+export const SITE_BRAND = "glasbazaporoko.si" as const;
 
-/** Predogledna slika za deljenje (Facebook, LinkedIn, X …) — datoteka v public/images/. */
-export const OG_IMAGE_PATH = "/images/hero-glasba-za-poroko.jpg" as const;
+/** Prikazno ime podjetja / izvajalca (JSON-LD, zaupanje). */
+export const SITE_BUSINESS_NAME = "Glasba za poroko – Barbara Zalaznik" as const;
+
+/** Konzistentna predogledna slika za OG/Twitter (javna pot). */
+export const OG_IMAGE_PATH = "/og-image.jpg" as const;
 
 export const OG_IMAGE_ALT =
-  "Violinistka Barbara Zalaznik pri poročnem nastopu — glasba za poroko, poročna glasba Slovenija";
+  "Premium poročna glasba in violinistka Barbara Zalaznik — glasba za poroko, poročni obred in slavje v Sloveniji";

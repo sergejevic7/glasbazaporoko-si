@@ -50,6 +50,56 @@ body {
   color: var(--color-ink);
 }
 
+/* Vidni ob obisku s tipkovnico — brez sprememb za miško (:focus-within ostane na obrazcih) */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 1rem;
+  z-index: 10000;
+  translate: -50% -280%;
+  border-radius: 9999px;
+  padding: 0.65rem 1.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-ivory);
+  background: var(--color-burgundy-deep);
+  box-shadow: var(--shadow-card);
+  transition: translate 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease;
+}
+
+.skip-link:focus {
+  translate: -50% 0;
+  outline: none;
+}
+
+.skip-link:focus-visible {
+  outline: 2px solid var(--color-champagne);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link {
+    transition: none;
+    translate: -50% -280%;
+  }
+  .skip-link:focus {
+    translate: -50% 0;
+  }
+}
+
+a:focus-visible:not(:disabled),
+button:focus-visible:not(:disabled) {
+  outline: 2px solid var(--color-burgundy);
+  outline-offset: 3px;
+}
+
+#main-content:focus {
+  outline: none;
+}
+
 @utility container-tight {
   width: 100%;
   margin-inline: auto;

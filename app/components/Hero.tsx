@@ -30,9 +30,9 @@ export default function Hero() {
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-charcoal/75 md:text-lg animate-fade-up delay-200">
             Eleganten in čustven violinski program za poročni obred, sprejem
-            svatov in prvi ples — prilagojen vajini zgodbi. Več kot dvajset let
-            izkušenj na slovenskih in mednarodnih odrih, vključno z osmimi leti
-            v Orkestru Slovenske filharmonije.
+            svatov in prvi ples — prilagojen vajini zgodbi. Dolgoletne izkušnje
+            na slovenskih in mednarodnih odrih, vključno z osmimi leti v
+            Orkestru Slovenske filharmonije.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4 animate-fade-up delay-300">
@@ -109,7 +109,7 @@ export default function Hero() {
           <MediaImage
             asset={HERO}
             priority
-            sizes="(min-width: 1024px) 40vw, 92vw"
+            sizes="(min-width: 1024px) min(38vw, 520px), min(92vw, 560px)"
             fallbackClassName="bg-gradient-to-br from-burgundy-deep via-burgundy to-charcoal"
             className="relative aspect-[4/5] w-full rounded-[2rem] shadow-[0_40px_80px_-30px_rgba(72,26,41,0.55)] animate-fade-in ring-1 ring-bone/40"
           />

@@ -1,10 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import Script from "next/script";
+import CookieConsentBanner from "./components/CookieConsentBanner";
+import GatedGoogleAnalytics from "./components/GatedGoogleAnalytics";
+import SkipToMain from "./components/SkipToMain";
+import { CookieConsentProvider } from "./context/CookieConsentContext";
 import {
   OG_IMAGE_ALT,
   OG_IMAGE_PATH,
-  SITE_NAME,
+  SITE_BRAND,
+  SITE_BUSINESS_NAME,
   SITE_URL,
 } from "./lib/site";
 import "./globals.css";
@@ -22,26 +27,57 @@ const body = Inter({
   display: "swap",
 });
 
-const DESCRIPTION =
-  "Vrhunska violinistka za poročni obred, sprejem svatov in slavnostne trenutke. Klasična in električna violina, prilagojen program in dolgoletne izkušnje na poročnih dogodkih po Sloveniji.";
+/** Primarni SEO naslov (Google SERP + zavihek brskalnika). */
+const SITE_TITLE_DEFAULT =
+  "Glasba za poroko | Premium poročna glasba" as const;
+
+/** Konverzijsko usmerjen meta opis — ključne fraze za glasbazaporoko.si. */
+const SITE_DESCRIPTION =
+  "Elegantna in profesionalna glasba za poroke, poročne obrede in slavja po Sloveniji." as const;
+
+/** Podporni ključni pojmi (meta keywords kot kontekstualni signal). */
+const SITE_KEYWORDS: readonly string[] = [
+  "glasba za poroko",
+  "poročna glasba",
+  "glasba za poročni obred",
+  "glasba za civilni obred",
+  "poročni band",
+  "glasbenik za poroko",
+  "poroka glasba Slovenija",
+  "violina na poroki",
+  "violinistka za poroko",
+  "glasba za sprejem svatov",
+  "Barbara Zalaznik",
+  "glasbazaporoko",
+];
+
+/** OG/Twitter naslov — skladen s primarnim naslovom za deljenje na socialnih omrežjih. */
+const SOCIAL_TITLE = SITE_TITLE_DEFAULT;
 
 export const viewport: Viewport = {
   themeColor: "#faf6f1",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: {
-    default:
-      "Glasba za poroko | Violinistka Barbara Zalaznik – poročni obred & sprejem",
-    template: "%s | Glasba za poroko",
+  /** Absolutna baza za OG/Twitter slike in naslove (`/og-image.jpg` → www.glasbazaporoko.si). */
+  metadataBase: new URL("https://www.glasbazaporoko.si"),
+  icons: {
+    icon: [{ url: "/icon.png", sizes: "512x512", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
-  description: DESCRIPTION,
-  authors: [{ name: "Barbara Zalaznik" }],
+  title: {
+    default: SITE_TITLE_DEFAULT,
+    template: `%s | ${SITE_BRAND}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_BRAND,
+  keywords: [...SITE_KEYWORDS],
+  authors: [{ name: "Barbara Zalaznik", url: SITE_URL }],
   creator: "Barbara Zalaznik",
-  publisher: "Glasba za poroko",
+  publisher: SITE_BRAND,
   alternates: {
     canonical: "/",
     languages: {
@@ -52,13 +88,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "sl_SI",
     url: SITE_URL,
-    siteName: SITE_NAME,
-    title:
-      "Glasba za poroko – violinistka Barbara Zalaznik | Poročni obred in sprejem",
-    description: DESCRIPTION,
+    siteName: SITE_BRAND,
+    title: SOCIAL_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: OG_IMAGE_PATH,
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
         alt: OG_IMAGE_ALT,
         type: "image/jpeg",
       },
@@ -66,9 +103,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Glasba za poroko – violinistka Barbara Zalaznik",
-    description: DESCRIPTION,
-    images: [OG_IMAGE_PATH],
+    title: SOCIAL_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -78,18 +115,28 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
-  category: "Wedding music",
+  category: "music",
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}#website`,
+      url: SITE_URL,
+      name: SITE_BUSINESS_NAME,
+      description: SITE_DESCRIPTION,
+      inLanguage: "sl-SI",
+      publisher: { "@id": `${SITE_URL}#localbusiness` },
+    },
+    {
       "@type": "MusicGroup",
       "@id": `${SITE_URL}#musicgroup`,
-      name: "Barbara Zalaznik – Glasba za poroko",
+      name: SITE_BUSINESS_NAME,
       url: SITE_URL,
       genre: ["Wedding", "Classical", "Crossover", "Pop", "Film score"],
       member: {
@@ -117,9 +164,9 @@ const jsonLd = {
     {
       "@type": "LocalBusiness",
       "@id": `${SITE_URL}#localbusiness`,
-      name: SITE_NAME,
+      name: SITE_BUSINESS_NAME,
       url: SITE_URL,
-      description: DESCRIPTION,
+      description: SITE_DESCRIPTION,
       image: `${SITE_URL}${OG_IMAGE_PATH}`,
       areaServed: {
         "@type": "Country",
@@ -198,14 +245,19 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory text-charcoal">
-        {children}
-        <Script
-          id="ld-json"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify(jsonLd)}
-        </Script>
+        <SkipToMain />
+        <CookieConsentProvider>
+          {children}
+          <CookieConsentBanner />
+          <GatedGoogleAnalytics />
+          <Script
+            id="ld-json"
+            type="application/ld+json"
+            strategy="beforeInteractive"
+          >
+            {JSON.stringify(jsonLd)}
+          </Script>
+        </CookieConsentProvider>
       </body>
     </html>
   );

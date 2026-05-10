@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { PHONE_TEL } from "../lib/contact";
+import { siteHashHref } from "../lib/hash-link";
 import { ArrowRight, Phone } from "./Icons";
 
 export default function StickyMobileCTA() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ export default function StickyMobileCTA() {
           <Phone className="h-5 w-5" />
         </a>
         <a
-          href="#kontakt"
+          href={siteHashHref(pathname, "#kontakt")}
           className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-burgundy px-5 py-3 text-sm font-medium text-ivory"
         >
           Pošljita povpraševanje

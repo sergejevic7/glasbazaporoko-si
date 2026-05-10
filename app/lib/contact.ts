@@ -1,3 +1,18 @@
+/** Možnosti storitve — morajo ustrezati obrazcu in server akciji. */
+export const INQUIRY_SERVICE_OPTIONS = [
+  "Glasba za civilni obred",
+  "Glasba za cerkveni obred",
+  "Glasba za pogostitev",
+  "Glasba za poročno slavje",
+  "Celoten poročni paket",
+  "Drugo",
+] as const;
+
+export type InquiryServiceOption = (typeof INQUIRY_SERVICE_OPTIONS)[number];
+
+/** Prejemnik povpraševanj (nadomestek z CONTACT_EMAIL v okolju). */
+export const CONTACT_EMAIL_DISPLAY = "info@glasbazaporoko.si";
+
 /** Mobitel za povpraševanja (prikaz + href za tel:) */
 export const PHONE_DISPLAY = "041 756 543";
 export const PHONE_TEL = "+38641756543";

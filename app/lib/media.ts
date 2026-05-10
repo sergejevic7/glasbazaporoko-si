@@ -9,9 +9,8 @@
  *
  * (or follow `public/images/README.md` for manual instructions).
  *
- * The `alt` text is written in Slovenian and includes target SEO keywords:
- * glasba za poroko, poročna glasba, glasba za poročni obred, violinistka za
- * poroko, glasbenik za poroko, poroka Slovenija.
+ * Intrinsic width/height help Next/Image reserve space (CLS). Alt text is
+ * Slovenian with natural keyword use (glasba za poroko, poročna glasba, …).
  */
 
 export type MediaAsset = {
@@ -19,11 +18,11 @@ export type MediaAsset = {
   src: string;
   /** Source URL on the original site (for download script + README) */
   source: string;
-  /** Slovenian alt text – do not leave empty, include keywords */
+  /** Slovenian alt text – meaningful for SEO & accessibility */
   alt: string;
-  /** Approximate intrinsic width if known (used by some sizing helpers) */
+  /** Intrinsic width in pixels (from source file) */
   width?: number;
-  /** Approximate intrinsic height if known */
+  /** Intrinsic height in pixels */
   height?: number;
 };
 
@@ -33,14 +32,18 @@ const SRC = "https://www.glasbazaporoko.si/wp-content/uploads";
 export const HERO: MediaAsset = {
   src: "/images/hero-glasba-za-poroko.jpg",
   source: `${SRC}/2022/11/Barbara-Zalaznik-Matos-glasba-na-poroki-1.jpg`,
-  alt: "Violinistka Barbara Zalaznik igra na poročnem obredu – glasba za poroko v živo",
+  alt: "Barbara Zalaznik — violinistka in glasbenik za poroko pri poročnem nastopu; glasba za poroko in poročna glasba v živo",
+  width: 1066,
+  height: 1515,
 };
 
 /** About — Barbara portrait. */
 export const PORTRAIT: MediaAsset = {
   src: "/images/barbara-zalaznik-portret.jpg",
   source: `${SRC}/2022/11/glasba-na-poroki-barbara.jpg`,
-  alt: "Barbara Zalaznik – violinistka in glasbenica za poročni obred",
+  alt: "Barbara Zalaznik, violinistka za poroko — glasba za poročni obred in elegantna poročna glasba",
+  width: 873,
+  height: 1024,
 };
 
 /** Gallery (6 tiles, in display order). */
@@ -48,32 +51,44 @@ export const GALLERY: MediaAsset[] = [
   {
     src: "/images/galerija-1-porocni-obred.jpg",
     source: `${SRC}/2022/11/Poroka-violina-1.jpg`,
-    alt: "Poročni obred z violinsko spremljavo – glasba za poročni obred",
+    alt: "Glasba za poročni obred v cerkvi — poročni nastop violinistke in poročna glasba",
+    width: 1079,
+    height: 577,
   },
   {
     src: "/images/galerija-2-civilni-obred.jpg",
     source: `${SRC}/2022/11/glasba-na-poroki-12.jpg`,
-    alt: "Glasba na civilnem obredu – violina na poroki",
+    alt: "Glasba za civilni obred na poroki — violina in profesionalna poročna glasba",
+    width: 696,
+    height: 1024,
   },
   {
     src: "/images/galerija-3-sprejem-svatov.jpg",
     source: `${SRC}/2022/11/glasba-za-poroko-15.jpg`,
-    alt: "Sprejem svatov ob violinski glasbi – poročna glasba",
+    alt: "Sprejem svatov ob poročni glasbi — glasba za poroko in violinistka za poroko",
+    width: 1000,
+    height: 667,
   },
   {
     src: "/images/galerija-4-prvi-ples.jpg",
     source: `${SRC}/2022/11/glasba-za-poroko-17.jpg`,
-    alt: "Prvi ples mladoporočencev ob violini – glasbenik za poroko",
+    alt: "Prvi ples — poročni nastop z violino; glasbenik za poroko in poročna glasba za slavje",
+    width: 1024,
+    height: 683,
   },
   {
     src: "/images/galerija-5-elektricna-violina.jpg",
     source: `${SRC}/2022/11/violinistka-novoletna-zabava.jpg`,
-    alt: "Električna violina – Barbara Zalaznik na slavnostnem dogodku",
+    alt: "Električna violina na poročnem nastopu — energična glasba za poroko",
+    width: 683,
+    height: 1024,
   },
   {
     src: "/images/galerija-6-poroka.jpg",
     source: `${SRC}/2022/11/glasba-na-poroki-14.jpg`,
-    alt: "Poroka v Sloveniji – glasba na poroki, violina v živo",
+    alt: "Poroka v Sloveniji — glasba za poroko z violino v živo",
+    width: 1024,
+    height: 683,
   },
 ];
 
@@ -82,17 +97,23 @@ export const VIDEO_POSTERS: MediaAsset[] = [
   {
     src: "/images/nastop-1.jpg",
     source: `${SRC}/2022/11/Barbara-Zalaznik-Matos-10.jpg`,
-    alt: "Poročni nastop violinistke – filmsko oblikovana poročna glasba",
+    alt: "Poročni nastop violinistke — poročna glasba in glasba za poroko ob obredu",
+    width: 1024,
+    height: 683,
   },
   {
     src: "/images/nastop-2.jpg",
     source: `${SRC}/2022/11/barbara-zalaznik-events.jpg`,
-    alt: "Klasična violina za civilni obred – Barbara Zalaznik",
+    alt: "Klasična violina za civilni ali cerkveni obred — glasbenik za poroko",
+    width: 1024,
+    height: 683,
   },
   {
     src: "/images/nastop-3.webp",
     source: `${SRC}/2022/11/Barbara-Zalaznik-Matos-glasba-na-poroki.webp`,
-    alt: "Električna violina za prvi ples – energičen poročni nastop",
+    alt: "Električna violina za prvi ples — poročni nastop in glasba za poroko",
+    width: 1000,
+    height: 1154,
   },
 ];
 
@@ -116,28 +137,31 @@ export type VideoSource = {
 };
 
 /**
- * Real videos from Barbara Zalaznik's public YouTube channel
- * (https://www.youtube.com/@barbarazalaznik-violin). Replace with
- * wedding-specific videos when available.
+ * Vdelani posnetki z YouTube (youtube-nocookie). Prvi dva sta „iz repertoarja“;
+ * tretja ploščica vodi na celoten kanal.
+ *
+ * Posnetki (zadnja dva URL-ja za repertoar):
+ * - https://youtu.be/sGru03hdcQY
+ * - https://youtu.be/8hJcwhoeju8
  */
 export const VIDEOS: VideoSource[] = [
   {
     poster: VIDEO_POSTERS[0],
-    youtubeId: "RrymFl0S2VA",
-    title: "Phantom of the Opera – violinski medley",
-    place: "Lindsey Stirling priredba",
+    youtubeId: "sGru03hdcQY",
+    title: "Violinski nastop iz repertoarja",
+    place: "YouTube posnetek",
     moment: "Iz repertoarja",
   },
   {
     poster: VIDEO_POSTERS[1],
-    youtubeId: "9fiOQh4_hDk",
-    title: "Električni violinski cover",
-    place: "Sodobna priredba",
+    youtubeId: "8hJcwhoeju8",
+    title: "Električni nastop iz repertoarja",
+    place: "YouTube posnetek",
     moment: "Iz repertoarja",
   },
   {
     poster: VIDEO_POSTERS[2],
-    externalLink: "https://www.youtube.com/@barbarazalaznik-violin/videos",
+    externalLink: "https://www.youtube.com/@barbarazalaznik-violin",
     title: "Celoten kanal nastopov",
     place: "@barbarazalaznik-violin",
     moment: "Več videov",
@@ -157,11 +181,15 @@ export const AMBIENT: Record<"header" | "footer", MediaAsset> = {
     src: "/images/ambient-header.jpg",
     source: `${SRC}/2020/11/header-background-scaled-1.jpg`,
     alt: "",
+    width: 2560,
+    height: 352,
   },
   footer: {
     src: "/images/ambient-footer.jpg",
     source: `${SRC}/2020/11/footer-background-scaled-1.jpg`,
     alt: "",
+    width: 2560,
+    height: 1120,
   },
 };
 
@@ -169,7 +197,9 @@ export const AMBIENT: Record<"header" | "footer", MediaAsset> = {
 export const LOGO: MediaAsset = {
   src: "/images/logo-bz.png",
   source: `${SRC}/2022/11/LOGO-BZ.png`,
-  alt: "Barbara Zalaznik – Glasba za poroko",
+  alt: "Barbara Zalaznik — glasba za poroko in premium poročna glasba",
+  width: 744,
+  height: 1052,
 };
 
 /** Aggregated download manifest used by scripts/download-assets.mjs. */

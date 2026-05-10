@@ -1,21 +1,45 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
-import { PHONE_DISPLAY, PHONE_TEL, RESPONSE_COPY } from "../lib/contact";
+import Link from "next/link";
+import { useActionState, useEffect, useRef } from "react";
+import {
+  submitContactForm,
+  type ContactField,
+  type ContactFormState,
+} from "../actions/contact";
+import {
+  CONTACT_EMAIL_DISPLAY,
+  INQUIRY_SERVICE_OPTIONS,
+  PHONE_DISPLAY,
+  PHONE_TEL,
+  RESPONSE_COPY,
+} from "../lib/contact";
 import { ArrowRight, Mail, MapPin, Phone } from "./Icons";
 
-type Status = "idle" | "submitting" | "success" | "error";
+const initialFormState: ContactFormState = { ok: false };
+
+function inputClass(invalid: boolean) {
+  return [
+    "mt-2 w-full rounded-2xl border bg-ivory px-4 py-3 text-base text-charcoal placeholder:text-charcoal/40 outline-none transition sm:text-sm",
+    "focus:ring-2 focus:ring-burgundy/15",
+    invalid
+      ? "border-rose/70 focus:border-rose"
+      : "border-bone/70 focus:border-burgundy/60",
+  ].join(" ");
+}
 
 export default function Contact() {
-  const [status, setStatus] = useState<Status>("idle");
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction, isPending] = useActionState(
+    submitContactForm,
+    initialFormState,
+  );
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("submitting");
-    // The form is intentionally a static layout. Wire up to a backend / email
-    // service (e.g. Resend, Formspree, Vercel Postmark) when deploying.
-    setTimeout(() => setStatus("success"), 700);
-  }
+  useEffect(() => {
+    if (state.ok) formRef.current?.reset();
+  }, [state.ok]);
+
+  const fieldError = (key: ContactField) => state.errors?.[key];
 
   return (
     <section
@@ -45,7 +69,7 @@ export default function Contact() {
 
             <ul className="mt-8 space-y-4 text-sm">
               <li className="flex items-start gap-4">
-                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-cream text-burgundy ring-1 ring-bone/70">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-cream text-burgundy ring-1 ring-bone/70">
                   <Phone className="h-4 w-4" />
                 </span>
                 <div>
@@ -61,7 +85,7 @@ export default function Contact() {
                 </div>
               </li>
               <li className="flex items-start gap-4">
-                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-cream text-burgundy ring-1 ring-bone/70">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-cream text-burgundy ring-1 ring-bone/70">
                   <Mail className="h-4 w-4" />
                 </span>
                 <div>
@@ -69,15 +93,15 @@ export default function Contact() {
                     E-pošta
                   </p>
                   <a
-                    href="mailto:info@glasbazaporoko.si"
+                    href={`mailto:${CONTACT_EMAIL_DISPLAY}`}
                     className="mt-1 block text-base font-medium text-charcoal hover:text-burgundy"
                   >
-                    info@glasbazaporoko.si
+                    {CONTACT_EMAIL_DISPLAY}
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-4">
-                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-cream text-burgundy ring-1 ring-bone/70">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-cream text-burgundy ring-1 ring-bone/70">
                   <MapPin className="h-4 w-4" />
                 </span>
                 <div>
@@ -86,9 +110,6 @@ export default function Contact() {
                   </p>
                   <p className="mt-1 text-base font-medium text-charcoal">
                     Vsa Slovenija &amp; sosednje države
-                  </p>
-                  <p className="mt-1 text-xs text-charcoal/60">
-                    Izhodišče: Ljubljana / Vrhnika
                   </p>
                 </div>
               </li>
@@ -100,110 +121,271 @@ export default function Contact() {
             </p>
           </div>
 
-          <form
-            onSubmit={onSubmit}
-            className="lg:col-span-7"
-            aria-describedby="form-help"
-          >
-            <p id="form-help" className="sr-only">
-              Polje označeno z * je obvezno.
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field
-                label="Ime in priimek"
-                name="ime"
-                placeholder="Ana Novak"
-                required
-              />
-              <Field
-                label="Email"
-                name="email"
-                type="email"
-                placeholder="ana@primer.si"
-                required
-              />
-              <Field
-                label="Telefon"
-                name="telefon"
-                type="tel"
-                placeholder={PHONE_DISPLAY}
-              />
-              <Field
-                label="Datum poroke"
-                name="datum"
-                type="date"
-              />
-              <Field
-                label="Lokacija / prizorišče"
-                name="lokacija"
-                placeholder="npr. Vila Bled"
-                className="sm:col-span-2"
-              />
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="storitev"
-                  className="text-[10px] uppercase tracking-[0.28em] text-gold-deep"
-                >
-                  Kateri del dne vaju zanima?
-                </label>
-                <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                  {[
-                    "Civilni obred",
-                    "Cerkveni obred",
-                    "Sprejem svatov",
-                    "Prvi ples",
-                  ].map((opt) => (
-                    <label
-                      key={opt}
-                      className="flex cursor-pointer items-center gap-2 rounded-full border border-bone/70 bg-ivory px-3 py-2 text-xs text-charcoal/80 transition hover:border-burgundy/40 has-[:checked]:border-burgundy has-[:checked]:bg-burgundy/5 has-[:checked]:text-burgundy"
-                    >
-                      <input
-                        type="checkbox"
-                        name="storitve"
-                        value={opt}
-                        className="h-3.5 w-3.5 accent-burgundy"
-                      />
-                      <span>{opt}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="sporocilo"
-                  className="text-[10px] uppercase tracking-[0.28em] text-gold-deep"
-                >
-                  Sporočilo
-                </label>
-                <textarea
-                  id="sporocilo"
-                  name="sporocilo"
-                  rows={5}
-                  placeholder="Povejta mi kaj o najini poroki — slog, vzdušje, posebne želje..."
-                  className="mt-2 w-full rounded-2xl border border-bone/70 bg-ivory px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/40 outline-none transition focus:border-burgundy/60 focus:ring-2 focus:ring-burgundy/15"
+          <div className="lg:col-span-7">
+            <form
+              ref={formRef}
+              action={formAction}
+              className="relative flex flex-col gap-6"
+              aria-busy={isPending}
+            >
+              {/* Honeypot — naj ostane prazno */}
+              <div
+                className="pointer-events-none absolute left-[-10000px] h-px w-px overflow-hidden opacity-0"
+                aria-hidden="true"
+              >
+                <label htmlFor="company_website">Company website</label>
+                <input
+                  id="company_website"
+                  type="text"
+                  name="company_website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  defaultValue=""
                 />
               </div>
-            </div>
 
-            <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="group inline-flex items-center gap-2 rounded-full bg-burgundy px-7 py-3.5 text-sm font-medium text-ivory shadow-[var(--shadow-card)] transition hover:bg-burgundy-deep disabled:opacity-70"
-              >
-                {status === "submitting" ? "Pošiljam…" : "Pošlji povpraševanje"}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </button>
-              {status === "success" && (
-                <p
-                  role="status"
-                  className="text-sm text-burgundy"
+              <p id="form-required-hint" className="sr-only">
+                Polja označena z obveznico so obvezna.
+              </p>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Field
+                  id="name"
+                  label="Ime in priimek"
+                  name="name"
+                  autoComplete="name"
+                  placeholder="Ana Novak"
+                  requiredMark
+                  error={fieldError("name")}
+                  disabled={isPending}
+                />
+                <Field
+                  id="email"
+                  label="E-pošta"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="ana@primer.si"
+                  requiredMark
+                  error={fieldError("email")}
+                  disabled={isPending}
+                />
+                <Field
+                  id="phone"
+                  label="Telefon"
+                  name="phone"
+                  type="tel"
+                  autoComplete="tel"
+                  placeholder={PHONE_DISPLAY}
+                  requiredMark
+                  error={fieldError("phone")}
+                  disabled={isPending}
+                />
+                <Field
+                  id="weddingDate"
+                  label="Datum poroke"
+                  name="weddingDate"
+                  type="date"
+                  requiredMark
+                  error={fieldError("weddingDate")}
+                  disabled={isPending}
+                />
+                <Field
+                  id="weddingLocation"
+                  label="Lokacija poroke"
+                  name="weddingLocation"
+                  autoComplete="street-address"
+                  placeholder="npr. Vila Bled, Ljubljana …"
+                  requiredMark
+                  error={fieldError("weddingLocation")}
+                  className="sm:col-span-2"
+                  disabled={isPending}
+                />
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="serviceType"
+                    className="text-[10px] uppercase tracking-[0.28em] text-gold-deep"
+                  >
+                    Vrsta storitve{" "}
+                    <span className="text-burgundy" aria-hidden="true">
+                      *
+                    </span>
+                  </label>
+                  <select
+                    id="serviceType"
+                    name="serviceType"
+                    required
+                    disabled={isPending}
+                    aria-invalid={Boolean(fieldError("serviceType"))}
+                    aria-describedby={
+                      fieldError("serviceType")
+                        ? "serviceType-error"
+                        : undefined
+                    }
+                    defaultValue=""
+                    className={inputClass(Boolean(fieldError("serviceType")))}
+                  >
+                    <option value="" disabled>
+                      Izberite storitev …
+                    </option>
+                    {INQUIRY_SERVICE_OPTIONS.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  {fieldError("serviceType") ? (
+                    <p
+                      id="serviceType-error"
+                      className="mt-1.5 text-sm text-burgundy-deep"
+                      role="alert"
+                    >
+                      {fieldError("serviceType")}
+                    </p>
+                  ) : null}
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="message"
+                    className="text-[10px] uppercase tracking-[0.28em] text-gold-deep"
+                  >
+                    Sporočilo{" "}
+                    <span className="text-burgundy" aria-hidden="true">
+                      *
+                    </span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    required
+                    disabled={isPending}
+                    placeholder="Povejta o slogu poroke, željah in posebnostih …"
+                    aria-invalid={Boolean(fieldError("message"))}
+                    aria-describedby={
+                      fieldError("message") ? "message-error" : undefined
+                    }
+                    className={inputClass(Boolean(fieldError("message")))}
+                  />
+                  {fieldError("message") ? (
+                    <p
+                      id="message-error"
+                      className="mt-1.5 text-sm text-burgundy-deep"
+                      role="alert"
+                    >
+                      {fieldError("message")}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="sm:col-span-2">
+                <div
+                  className={`flex gap-3 rounded-2xl border bg-cream/45 p-4 ring-1 ${
+                    fieldError("privacyConsent")
+                      ? "border-rose/60 ring-rose/25"
+                      : "border-bone/70 ring-bone/50"
+                  }`}
                 >
-                  {RESPONSE_COPY.formSuccess}
-                </p>
-              )}
-            </div>
-          </form>
+                  <input
+                    id="privacyConsent"
+                    name="privacyConsent"
+                    type="checkbox"
+                    required
+                    disabled={isPending}
+                    value="on"
+                    aria-invalid={Boolean(fieldError("privacyConsent"))}
+                    aria-describedby={
+                      fieldError("privacyConsent")
+                        ? "privacyConsent-error"
+                        : undefined
+                    }
+                    className="mt-1 h-4 w-4 shrink-0 accent-burgundy"
+                  />
+                  <label
+                    htmlFor="privacyConsent"
+                    className="text-sm leading-relaxed text-charcoal/85"
+                  >
+                    Ob oddaji soglašam z obdelavo osebnih podatkov za namen
+                    obravnave povpraševanja in priprave ponudbe, kot je opisano
+                    v{" "}
+                    <Link
+                      href="/zasebnost"
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="font-medium text-burgundy underline decoration-burgundy/35 underline-offset-2 hover:decoration-burgundy"
+                    >
+                      politiki zasebnosti
+                    </Link>
+                    . Označeno je lahko prekličete tako, da nam pišete na{" "}
+                    <a
+                      href={`mailto:${CONTACT_EMAIL_DISPLAY}`}
+                      className="font-medium text-burgundy underline decoration-burgundy/35 underline-offset-2"
+                    >
+                      {CONTACT_EMAIL_DISPLAY}
+                    </a>
+                    .
+                  </label>
+                </div>
+                {fieldError("privacyConsent") ? (
+                  <p
+                    id="privacyConsent-error"
+                    className="mt-2 text-sm text-burgundy-deep"
+                    role="alert"
+                  >
+                    {fieldError("privacyConsent")}
+                  </p>
+                ) : null}
+              </div>
+
+              <div className="flex flex-col gap-4 border-t border-bone/60 pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <button
+                  type="submit"
+                  disabled={isPending}
+                  className="group inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full bg-burgundy px-8 py-3.5 text-sm font-medium text-ivory shadow-[var(--shadow-card)] transition hover:bg-burgundy-deep disabled:pointer-events-none disabled:opacity-65"
+                >
+                  {isPending ? (
+                    <>
+                      <span
+                        className="h-4 w-4 animate-spin rounded-full border-2 border-ivory/30 border-t-ivory"
+                        aria-hidden
+                      />
+                      Pošiljam …
+                    </>
+                  ) : (
+                    <>
+                      Pošlji povpraševanje
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </>
+                  )}
+                </button>
+
+                <div
+                  className="min-h-[3rem] flex-1 text-sm sm:text-right"
+                  aria-live="polite"
+                >
+                  {state.ok ? (
+                    <p
+                      role="status"
+                      className="rounded-2xl border border-champagne/40 bg-champagne/15 px-4 py-3 text-left text-charcoal sm:text-right"
+                    >
+                      {RESPONSE_COPY.formSuccess}
+                    </p>
+                  ) : null}
+                  {!state.ok && state.message ? (
+                    <p
+                      role="alert"
+                      className="rounded-2xl border border-rose/50 bg-rose/10 px-4 py-3 text-left text-burgundy-deep sm:text-right"
+                    >
+                      {state.message}
+                    </p>
+                  ) : null}
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
@@ -211,33 +393,59 @@ export default function Contact() {
 }
 
 function Field({
+  id,
   label,
   name,
   type = "text",
   placeholder,
-  required,
+  requiredMark,
+  error,
   className,
+  disabled,
+  autoComplete,
 }: {
+  id: string;
   label: string;
   name: string;
   type?: string;
   placeholder?: string;
-  required?: boolean;
+  requiredMark?: boolean;
+  error?: string;
   className?: string;
+  disabled?: boolean;
+  autoComplete?: string;
 }) {
+  const errId = `${id}-error`;
   return (
-    <label className={`block ${className ?? ""}`}>
-      <span className="text-[10px] uppercase tracking-[0.28em] text-gold-deep">
-        {label}
-        {required ? " *" : ""}
-      </span>
+    <div className={className}>
+      <label
+        htmlFor={id}
+        className="text-[10px] uppercase tracking-[0.28em] text-gold-deep"
+      >
+        {label}{" "}
+        {requiredMark ? (
+          <span className="text-burgundy" aria-hidden="true">
+            *
+          </span>
+        ) : null}
+      </label>
       <input
+        id={id}
         name={name}
         type={type}
         placeholder={placeholder}
-        required={required}
-        className="mt-2 w-full rounded-2xl border border-bone/70 bg-ivory px-4 py-3 text-sm text-charcoal placeholder:text-charcoal/40 outline-none transition focus:border-burgundy/60 focus:ring-2 focus:ring-burgundy/15"
+        autoComplete={autoComplete}
+        required={Boolean(requiredMark)}
+        disabled={disabled}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? errId : undefined}
+        className={inputClass(Boolean(error))}
       />
-    </label>
+      {error ? (
+        <p id={errId} className="mt-1.5 text-sm text-burgundy-deep" role="alert">
+          {error}
+        </p>
+      ) : null}
+    </div>
   );
 }

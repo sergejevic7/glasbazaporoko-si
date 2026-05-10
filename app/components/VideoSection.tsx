@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { VIDEOS } from "../lib/media";
+import { useEffect, useState } from "react";
+import { SOCIAL, VIDEOS } from "../lib/media";
 import { ArrowRight, Close, Play } from "./Icons";
 import MediaImage from "./MediaImage";
 
@@ -14,6 +14,15 @@ const FALLBACKS = [
 export default function VideoSection() {
   const [active, setActive] = useState<number | null>(null);
   const current = active !== null ? VIDEOS[active] : null;
+
+  useEffect(() => {
+    if (active === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active]);
 
   return (
     <section
@@ -55,17 +64,37 @@ export default function VideoSection() {
           {VIDEOS.map((v, i) => {
             const canEmbed = Boolean(v.youtubeId || v.localFile);
             const isExternal = !canEmbed && Boolean(v.externalLink);
-            const Tag: "button" | "a" = isExternal ? "a" : "button";
-            const interactiveProps = isExternal
-              ? {
-                  href: v.externalLink,
-                  target: "_blank",
-                  rel: "noreferrer noopener",
-                }
-              : {
-                  type: "button" as const,
-                  onClick: () => canEmbed && setActive(i),
-                };
+            const aria =
+              isExternal
+                ? `Odpri ${v.title} v novem zavihku`
+                : canEmbed
+                  ? `Predvajaj video: ${v.title}`
+                  : v.title;
+
+            const inner = (
+              <>
+                <div className="flex items-center justify-between">
+                  <span className="rounded-full border border-ivory/30 bg-ivory/10 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-ivory backdrop-blur">
+                    {v.moment}
+                  </span>
+                  <span className="grid h-12 w-12 place-items-center rounded-full bg-ivory text-burgundy shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] transition group-hover:scale-110">
+                    {isExternal ? (
+                      <ArrowRight className="h-4 w-4" />
+                    ) : (
+                      <Play className="h-4 w-4 translate-x-[1px]" />
+                    )}
+                  </span>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.28em] text-champagne/90">
+                    {v.place}
+                  </p>
+                  <h3 className="heading-display mt-2 text-2xl text-ivory md:text-[1.6rem]">
+                    {v.title}
+                  </h3>
+                </div>
+              </>
+            );
 
             return (
               <article
@@ -74,7 +103,7 @@ export default function VideoSection() {
               >
                 <MediaImage
                   asset={v.poster}
-                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  sizes="(min-width: 1024px) min(32vw, 400px), min(100vw, 640px)"
                   fallbackClassName={FALLBACKS[i]}
                   className="absolute inset-0 transition duration-700 group-hover:scale-[1.04]"
                 />
@@ -83,39 +112,26 @@ export default function VideoSection() {
                   className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/30 to-charcoal/40"
                 />
 
-                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-                <Tag
-                  {...(interactiveProps as any)}
-                  aria-label={
-                    isExternal
-                      ? `Odpri ${v.title} v novem zavihku`
-                      : canEmbed
-                        ? `Predvajaj video: ${v.title}`
-                        : v.title
-                  }
-                  className="absolute inset-0 flex flex-col justify-between p-6 text-left"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full border border-ivory/30 bg-ivory/10 px-3 py-1 text-[10px] uppercase tracking-[0.28em] text-ivory backdrop-blur">
-                      {v.moment}
-                    </span>
-                    <span className="grid h-12 w-12 place-items-center rounded-full bg-ivory text-burgundy shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] transition group-hover:scale-110">
-                      {isExternal ? (
-                        <ArrowRight className="h-4 w-4" />
-                      ) : (
-                        <Play className="h-4 w-4 translate-x-[1px]" />
-                      )}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.28em] text-champagne/90">
-                      {v.place}
-                    </p>
-                    <h3 className="heading-display mt-2 text-2xl text-ivory md:text-[1.6rem]">
-                      {v.title}
-                    </h3>
-                  </div>
-                </Tag>
+                {isExternal && v.externalLink ? (
+                  <a
+                    href={v.externalLink}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={aria}
+                    className="absolute inset-0 flex flex-col justify-between p-6 text-left"
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => canEmbed && setActive(i)}
+                    aria-label={aria}
+                    className="absolute inset-0 flex flex-col justify-between p-6 text-left"
+                  >
+                    {inner}
+                  </button>
+                )}
               </article>
             );
           })}
@@ -124,7 +140,7 @@ export default function VideoSection() {
         <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-ivory/55">
           Več nastopov najdeta na{" "}
           <a
-            href="https://www.youtube.com/@barbarazalaznik-violin"
+            href={SOCIAL.youtube}
             target="_blank"
             rel="noreferrer noopener"
             className="underline decoration-champagne/40 underline-offset-4 hover:text-champagne"
@@ -166,19 +182,20 @@ export default function VideoSection() {
           >
             {current.youtubeId ? (
               <iframe
-                src={`https://www.youtube-nocookie.com/embed/${current.youtubeId}?autoplay=1&rel=0`}
+                src={`https://www.youtube-nocookie.com/embed/${current.youtubeId}?autoplay=1&mute=0&rel=0&modestbranding=1&playsinline=1`}
                 title={current.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 allowFullScreen
-                className="absolute inset-0 h-full w-full"
+                className="absolute inset-0 h-full w-full border-0"
               />
             ) : current.localFile ? (
-              // eslint-disable-next-line jsx-a11y/media-has-caption
               <video
                 src={`/videos/${current.localFile}`}
                 poster={current.poster.src}
                 controls
-                autoPlay
+                playsInline
+                preload="metadata"
                 className="absolute inset-0 h-full w-full object-contain"
               />
             ) : null}

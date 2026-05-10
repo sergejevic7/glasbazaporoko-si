@@ -1,5 +1,13 @@
-import { PHONE_DISPLAY, PHONE_TEL } from "../lib/contact";
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { CONTACT_EMAIL_DISPLAY, PHONE_DISPLAY, PHONE_TEL } from "../lib/contact";
+import { siteHashHref } from "../lib/hash-link";
 import { SOCIAL } from "../lib/media";
+import { SITE_BRAND, SITE_URL } from "../lib/site";
+import { BrandMarkIcon } from "./BrandMark";
+import CookiePreferencesLink from "./CookiePreferencesLink";
 import { Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "./Icons";
 
 const NAV = [
@@ -14,6 +22,8 @@ const NAV = [
 ];
 
 export default function SiteFooter() {
+  const pathname = usePathname();
+
   return (
     <footer className="relative bg-charcoal text-ivory">
       <div
@@ -26,22 +36,9 @@ export default function SiteFooter() {
             <div className="flex items-center gap-3">
               <span
                 aria-hidden
-                className="grid h-11 w-11 place-items-center rounded-full border border-champagne/40 bg-ivory/5 text-champagne"
+                className="grid h-11 w-11 shrink-0 place-items-center overflow-visible rounded-full border border-champagne/40 bg-ivory/5 text-champagne"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden
-                >
-                  <path d="M14.5 3.5c1.5 1.5 1.5 4 0 5.5l-7 7c-1.5 1.5-4 1.5-5.5 0s-1.5-4 0-5.5l7-7c1.5-1.5 4-1.5 5.5 0z" />
-                  <path d="M16 8l4-4M19 11l3.5-3.5" />
-                  <circle cx="6" cy="18" r="1.2" />
-                </svg>
+                <BrandMarkIcon className="h-5 w-5 shrink-0 overflow-visible" />
               </span>
               <div className="flex flex-col leading-tight">
                 <span className="heading-display text-xl text-ivory">
@@ -88,7 +85,7 @@ export default function SiteFooter() {
               {NAV.map((n) => (
                 <li key={n.href}>
                   <a
-                    href={n.href}
+                    href={siteHashHref(pathname, n.href)}
                     className="transition hover:text-champagne"
                   >
                     {n.label}
@@ -115,10 +112,10 @@ export default function SiteFooter() {
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 text-champagne" />
                 <a
-                  href="mailto:info@glasbazaporoko.si"
+                  href={`mailto:${CONTACT_EMAIL_DISPLAY}`}
                   className="text-ivory/85 hover:text-champagne"
                 >
-                  info@glasbazaporoko.si
+                  {CONTACT_EMAIL_DISPLAY}
                 </a>
               </li>
               <li className="flex items-start gap-3">
@@ -130,7 +127,7 @@ export default function SiteFooter() {
             </ul>
 
             <a
-              href="#kontakt"
+              href={siteHashHref(pathname, "#kontakt")}
               className="mt-7 inline-flex items-center justify-center gap-2 rounded-full bg-champagne px-5 py-3 text-sm font-medium text-charcoal transition hover:bg-gold"
             >
               Pošljita povpraševanje
@@ -138,20 +135,29 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-ivory/10 pt-8 text-xs text-ivory/55 md:flex-row md:items-center">
+        <div className="mt-14 flex flex-col gap-6 border-t border-ivory/10 pt-8 text-xs text-ivory/55 md:flex-row md:flex-wrap md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} Glasba za poroko · Barbara Zalaznik.
             Vse pravice pridržane.
           </p>
-          <p>
-            Spletni avtor:{" "}
-            <a
-              href="#"
-              className="underline decoration-ivory/20 underline-offset-4 hover:text-champagne"
+          <nav
+            aria-label="Pravne povezave in nastavitve"
+            className="flex flex-wrap items-center gap-x-6 gap-y-2"
+          >
+            <Link
+              href="/zasebnost"
+              className="text-ivory/80 transition hover:text-champagne"
             >
-              www.glasbazaporoko.si
+              Politika zasebnosti
+            </Link>
+            <CookiePreferencesLink />
+            <a
+              href={SITE_URL}
+              className="text-ivory/80 transition hover:text-champagne"
+            >
+              {SITE_BRAND}
             </a>
-          </p>
+          </nav>
         </div>
       </div>
     </footer>

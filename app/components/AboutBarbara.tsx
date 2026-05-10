@@ -36,7 +36,7 @@ export default function AboutBarbara() {
           <div className="relative lg:col-span-5">
             <MediaImage
               asset={PORTRAIT}
-              sizes="(min-width: 1024px) 35vw, 92vw"
+              sizes="(min-width: 1024px) min(34vw, 440px), min(92vw, 520px)"
               fallbackClassName="bg-gradient-to-br from-cream via-bone to-champagne/40"
               className="relative aspect-[4/5] rounded-[2rem] shadow-[var(--shadow-elegant)] ring-1 ring-bone/70"
             />

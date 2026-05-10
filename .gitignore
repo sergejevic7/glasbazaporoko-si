@@ -58,3 +58,6 @@ Desktop.ini
 
 # Optional: local scratch / downloads from tooling
 site-home.html
+
+.vercel
+.env*.local

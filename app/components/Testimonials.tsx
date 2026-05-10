@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { AMBIENT } from "../lib/media";
 import { Quote, Star } from "./Icons";
+import MediaImage from "./MediaImage";
 
 const TESTIMONIALS = [
   {
@@ -30,26 +30,24 @@ export default function Testimonials() {
     <section
       id="mnenja"
       aria-labelledby="mnenja-naslov"
-      className="relative isolate overflow-hidden py-20 md:py-28 lg:py-32"
+      className="relative isolate min-h-[520px] overflow-hidden py-20 md:min-h-[560px] md:py-28 lg:py-32"
     >
-      <span
-        aria-hidden
-        className="absolute inset-0 -z-20 bg-cream"
-      />
-      <Image
-        src={AMBIENT.header.src}
-        alt=""
-        aria-hidden
-        fill
+      <span aria-hidden className="absolute inset-0 -z-30 bg-cream" />
+      <MediaImage
+        asset={AMBIENT.header}
         sizes="100vw"
-        className="-z-10 object-cover opacity-15"
+        blurDataURL={null}
+        quality={60}
+        className="absolute inset-0 -z-20"
+        imgClassName="object-cover opacity-[0.14]"
+        fallbackClassName="bg-cream"
       />
       <span
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-cream/90 via-cream/80 to-cream"
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-cream/92 via-cream/82 to-cream"
       />
 
-      <div className="container-tight">
+      <div className="relative container-tight">
         <div className="mx-auto max-w-3xl text-center">
           <div className="flex items-center justify-center gap-3">
             <span className="soft-divider" />
@@ -98,14 +96,12 @@ export default function Testimonials() {
                     .replace("&", "")}
                 </span>
                 <div>
-                  <p className="text-sm font-medium text-charcoal">
-                    {t.author}
-                  </p>
+                  <p className="text-sm font-medium text-charcoal">{t.author}</p>
                   <p className="text-xs text-charcoal/60">{t.place}</p>
                 </div>
                 <span className="ml-auto flex items-center gap-0.5 text-gold">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-3 w-3" />
+                  {[...Array(5)].map((_, si) => (
+                    <Star key={si} className="h-3 w-3" />
                   ))}
                 </span>
               </figcaption>

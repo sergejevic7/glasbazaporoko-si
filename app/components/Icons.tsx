@@ -24,9 +24,16 @@ export function Sparkle(props: IconProps) {
 export function Violin(props: IconProps) {
   return (
     <svg {...baseProps} {...props}>
-      <path d="M14.5 3.5c1.5 1.5 1.5 4 0 5.5l-7 7c-1.5 1.5-4 1.5-5.5 0s-1.5-4 0-5.5l7-7c1.5-1.5 4-1.5 5.5 0z" />
-      <path d="M16 8l4-4M19 11l4-4" />
-      <circle cx="6" cy="18" r="1.5" />
+      <g transform="rotate(25 12 12)">
+        {/* Scroll / pegbox */}
+        <path d="M10.5 4.5 Q10.5 1.5 12 1.5 Q13.5 1.5 13.5 4.5" />
+        {/* Neck */}
+        <path d="M10.5 4.5 L10.5 7.5 M13.5 4.5 L13.5 7.5" />
+        {/* Body — upper bout, waist (C-bouts), lower bout */}
+        <path d="M10.5 7.5 C7 7.5 5.5 9.5 6 11.5 C6.5 13 9 13.5 9 15 C9 16.5 6 17 6 19.5 C6 21.5 8.5 23 12 23 C15.5 23 18 21.5 18 19.5 C18 17 15 16.5 15 15 C15 13.5 17.5 13 18 11.5 C18.5 9.5 17 7.5 13.5 7.5 Z" />
+        {/* F-holes */}
+        <path d="M9 16 L9 18 M15 16 L15 18" />
+      </g>
     </svg>
   );
 }

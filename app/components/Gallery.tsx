@@ -53,11 +53,11 @@ export default function Gallery() {
             return (
               <figure
                 key={asset.src}
-                className={`group relative overflow-hidden rounded-3xl ring-1 ring-bone/70 ${t.span}`}
+                className={`group relative isolate overflow-hidden rounded-3xl ring-1 ring-bone/70 ${t.span}`}
               >
                 <MediaImage
                   asset={asset}
-                  sizes="(min-width: 1024px) 25vw, 50vw"
+                  sizes="(min-width: 1024px) min(28vw, 520px), min(48vw, 560px)"
                   fallbackClassName={FALLBACKS[i]}
                   className="absolute inset-0 transition duration-700 group-hover:scale-[1.04]"
                 />
