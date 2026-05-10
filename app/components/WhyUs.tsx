@@ -60,6 +60,10 @@ export default function WhyUs() {
             pripravim z mislijo na vajin slog, prostor in čustvo, ki ga želita
             ohraniti za vse življenje.
           </p>
+          <p className="mt-4 text-sm font-medium text-charcoal/80 md:text-base">
+            Akademsko šolanje · dolgoletni nastopi · od intimnih obredov do
+            prestižnih prizorišč.
+          </p>
         </div>
 
         <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

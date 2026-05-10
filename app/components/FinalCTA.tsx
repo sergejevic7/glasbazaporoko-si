@@ -8,6 +8,7 @@ export default function FinalCTA() {
 
   return (
     <section
+      id="rezerviraj-term"
       aria-labelledby="cta-naslov"
       className="relative overflow-hidden py-20 md:py-28 lg:py-32"
     >
@@ -20,6 +21,7 @@ export default function FinalCTA() {
           <MediaImage
             asset={bg}
             sizes="(max-width: 768px) 100vw, min(1152px, 92vw)"
+            quality={68}
             blurDataURL={null}
             className="absolute inset-0 -z-20 rounded-[2rem]"
             imgClassName="opacity-35 mix-blend-luminosity"
@@ -62,14 +64,14 @@ export default function FinalCTA() {
               <div className="flex flex-col gap-3">
                 <a
                   href="#kontakt"
-                  className="group inline-flex items-center justify-between gap-2 rounded-full bg-champagne px-7 py-4 text-base font-medium text-charcoal transition hover:bg-gold"
+                  className="group inline-flex min-h-[52px] items-center justify-between gap-2 rounded-full bg-champagne px-7 py-4 text-base font-medium text-charcoal transition hover:bg-gold focus-visible:outline-offset-4"
                 >
                   Pošljita povpraševanje
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </a>
                 <a
                   href={`tel:${PHONE_TEL}`}
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-ivory/25 bg-ivory/5 px-7 py-4 text-base font-medium text-ivory transition hover:border-ivory/45 hover:bg-ivory/10"
+                  className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-ivory/25 bg-ivory/5 px-7 py-4 text-base font-medium text-ivory transition hover:border-ivory/45 hover:bg-ivory/10 focus-visible:outline-offset-4"
                 >
                   Pokliči na {PHONE_DISPLAY}
                 </a>

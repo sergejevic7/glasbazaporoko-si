@@ -17,14 +17,18 @@ export default function Page() {
   return (
     <>
       <SiteHeader />
-      <main className="relative">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="relative outline-none"
+      >
         <Hero />
         <WhyUs />
+        <Testimonials />
         <Services />
         <VideoSection />
         <Gallery />
         <AboutBarbara />
-        <Testimonials />
         <Process />
         <FAQ />
         <FinalCTA />

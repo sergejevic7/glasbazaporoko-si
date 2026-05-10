@@ -137,6 +137,16 @@ button:focus-visible:not(:disabled) {
   );
 }
 
+/** Sidrna pomnilnost za skoke iz sticky navigacije */
+main section[id] {
+  scroll-margin-top: 5.75rem;
+}
+@media (min-width: 1024px) {
+  main section[id] {
+    scroll-margin-top: 6.75rem;
+  }
+}
+
 @keyframes fade-up {
   from {
     opacity: 0;

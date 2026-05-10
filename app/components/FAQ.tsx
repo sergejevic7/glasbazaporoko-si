@@ -69,7 +69,7 @@ export default function FAQ() {
               </p>
               <a
                 href="#kontakt"
-                className="mt-7 inline-flex items-center gap-2 rounded-full border border-charcoal/15 bg-ivory px-5 py-3 text-sm font-medium text-charcoal transition hover:border-burgundy/40 hover:text-burgundy"
+                className="mt-7 inline-flex min-h-[44px] items-center gap-2 rounded-full border border-charcoal/15 bg-ivory px-5 py-3 text-sm font-medium text-charcoal transition hover:border-burgundy/40 hover:text-burgundy focus-visible:outline-offset-4"
               >
                 Postavi vprašanje
               </a>
@@ -80,33 +80,42 @@ export default function FAQ() {
             <ul className="divide-y divide-bone/70 overflow-hidden rounded-3xl border border-bone/70 bg-ivory">
               {ITEMS.map((item, i) => {
                 const isOpen = open === i;
+                const panelId = `faq-panel-${i}`;
+                const btnId = `faq-trigger-${i}`;
                 return (
                   <li key={item.q}>
-                    <button
-                      type="button"
-                      onClick={() => setOpen(isOpen ? null : i)}
-                      aria-expanded={isOpen}
-                      className="flex w-full items-center gap-4 px-6 py-5 text-left transition hover:bg-cream/60 md:px-7"
-                    >
-                      <span className="heading-display flex-1 text-lg text-charcoal md:text-xl">
-                        {item.q}
-                      </span>
-                      <span
-                        aria-hidden
-                        className={`grid h-9 w-9 flex-none place-items-center rounded-full ring-1 transition ${
-                          isOpen
-                            ? "bg-burgundy text-ivory ring-burgundy"
-                            : "bg-cream text-burgundy ring-bone/70"
-                        }`}
+                    <h3 className="m-0 text-[inherit] font-normal leading-snug">
+                      <button
+                        id={btnId}
+                        type="button"
+                        onClick={() => setOpen(isOpen ? null : i)}
+                        aria-expanded={isOpen}
+                        aria-controls={panelId}
+                        className="flex w-full items-center gap-4 px-6 py-5 text-left transition hover:bg-cream/60 focus-visible:outline-offset-4 md:px-7"
                       >
-                        {isOpen ? (
-                          <Minus className="h-4 w-4" />
-                        ) : (
-                          <Plus className="h-4 w-4" />
-                        )}
-                      </span>
-                    </button>
+                        <span className="heading-display flex-1 text-lg text-charcoal md:text-xl">
+                          {item.q}
+                        </span>
+                        <span
+                          aria-hidden
+                          className={`grid h-9 w-9 flex-none place-items-center rounded-full ring-1 transition ${
+                            isOpen
+                              ? "bg-burgundy text-ivory ring-burgundy"
+                              : "bg-cream text-burgundy ring-bone/70"
+                          }`}
+                        >
+                          {isOpen ? (
+                            <Minus className="h-4 w-4" />
+                          ) : (
+                            <Plus className="h-4 w-4" />
+                          )}
+                        </span>
+                      </button>
+                    </h3>
                     <div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={btnId}
                       className={`grid overflow-hidden transition-[grid-template-rows] duration-500 ease-out ${
                         isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                       }`}

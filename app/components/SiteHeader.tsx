@@ -15,6 +15,7 @@ const NAV = [
   { href: "#proces", label: "Proces" },
   { href: "#mnenja", label: "Mnenja" },
   { href: "#pogosta-vprasanja", label: "FAQ" },
+  { href: "#rezerviraj-term", label: "Rezervacija" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
@@ -41,6 +42,15 @@ export default function SiteHeader() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
@@ -52,7 +62,7 @@ export default function SiteHeader() {
       <div className="container-tight flex items-center justify-between py-4 md:py-5">
         <Link
           href={siteHomeHref(pathname)}
-          className="group flex items-center gap-3"
+          className="group flex items-center gap-3 rounded-xl py-1 focus-visible:outline-offset-4"
           aria-label="Glasba za poroko – domov"
         >
           <span
@@ -71,12 +81,12 @@ export default function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Glavni meni">
+        <nav className="hidden items-center gap-4 xl:gap-8 lg:flex" aria-label="Glavni meni">
           {NAV.map((item) => (
             <a
               key={item.href}
               href={siteHashHref(pathname, item.href)}
-              className="text-sm text-charcoal/70 transition hover:text-burgundy"
+              className="rounded-lg px-2 py-2.5 text-sm text-charcoal/70 transition hover:bg-charcoal/[0.04] hover:text-burgundy focus-visible:outline-offset-4 xl:px-2.5"
             >
               {item.label}
             </a>
@@ -86,7 +96,7 @@ export default function SiteHeader() {
         <div className="hidden lg:block">
           <a
             href={siteHashHref(pathname, "#kontakt")}
-            className="inline-flex items-center gap-2 rounded-full bg-burgundy px-5 py-2.5 text-sm font-medium text-ivory shadow-[var(--shadow-card)] transition hover:bg-burgundy-deep"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-burgundy px-5 py-2.5 text-sm font-medium text-ivory shadow-[var(--shadow-card)] transition hover:bg-burgundy-deep focus-visible:outline-offset-4"
           >
             Pošljita povpraševanje
           </a>
@@ -97,7 +107,7 @@ export default function SiteHeader() {
           aria-label={open ? "Zapri meni" : "Odpri meni"}
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
-          className="grid h-11 w-11 place-items-center rounded-full border border-bone/80 bg-ivory/60 text-charcoal lg:hidden"
+          className="grid min-h-[44px] min-w-[44px] place-items-center rounded-full border border-bone/80 bg-ivory/60 text-charcoal transition hover:bg-cream/80 focus-visible:outline-offset-4 lg:hidden"
         >
           {open ? <Close className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
@@ -108,20 +118,24 @@ export default function SiteHeader() {
         aria-hidden={!open}
       >
         <div
+          role="presentation"
+          tabIndex={-1}
           className={`fixed inset-0 top-[72px] bg-ivory/98 backdrop-blur-xl transition-opacity duration-300 ${
             open ? "opacity-100" : "opacity-0"
           }`}
+          onClick={() => setOpen(false)}
         >
           <nav
-            className="container-tight flex flex-col gap-1 pt-8"
+            className="container-tight flex max-h-[min(520px,calc(100dvh-5rem))] flex-col gap-1 overflow-y-auto overscroll-contain pt-8 pb-12"
             aria-label="Mobilni meni"
+            onClick={(e) => e.stopPropagation()}
           >
             {NAV.map((item, i) => (
               <a
                 key={item.href}
                 href={siteHashHref(pathname, item.href)}
                 onClick={() => setOpen(false)}
-                className="border-b border-bone/60 py-4 heading-display text-3xl text-charcoal"
+                className="border-b border-bone/60 py-5 heading-display text-3xl text-charcoal transition-colors hover:text-burgundy focus-visible:outline-offset-4"
                 style={{
                   transitionDelay: `${i * 40}ms`,
                 }}
@@ -132,7 +146,7 @@ export default function SiteHeader() {
             <a
               href={siteHashHref(pathname, "#kontakt")}
               onClick={() => setOpen(false)}
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-burgundy px-6 py-4 text-base font-medium text-ivory shadow-[var(--shadow-card)]"
+              className="mt-8 inline-flex min-h-[52px] items-center justify-center rounded-full bg-burgundy px-6 py-4 text-base font-medium text-ivory shadow-[var(--shadow-card)] focus-visible:outline-offset-4"
             >
               Pošljita povpraševanje
             </a>

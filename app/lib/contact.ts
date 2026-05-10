@@ -21,18 +21,18 @@ export const PHONE_TEL = "+38641756543";
 export const RESPONSE_COPY = {
   /** Kontakt – uvodni odstavek */
   contactIntro:
-    "Sporočita datum, lokacijo in želje — odgovorim, kakor hitro uspem.",
+    "Datum poroke, prizorišče in želje — pišita prostorno. Vsako povpraševanje obravnavam osebno; odgovorim v najkrajšem možnem roku.",
   /** Zapiranje CTA bloka */
   finalCtaBody:
-    "Pošljita kratko sporočilo z datumom in lokacijo. Odgovorim, kakor hitro uspem. Vsako povpraševanje obravnavam osebno.",
+    "Začniva z datumom in lokacijo — že iz prvega sporočila vesta, da je za vaju rezerviran čas. Brez obveznosti: najprej poslušam, nato predlagam.",
   /** Kratka vrstica pod gumbi */
-  finalCtaFootnote: "Odgovorim, kakor hitro uspem · brez obveznosti",
+  finalCtaFootnote: "Oseben odgovor · brez obveznosti · diskretna obravnava",
   /** Proces, korak 1 */
   processStep1:
     "Sporočita datum, lokacijo in svojo vizijo. Odgovorim, kakor hitro uspem.",
   /** FAQ sidebar */
   faqAside:
-    "Če pri katerem od odgovorov ostane kaj nedorečenega, mi z veseljem napišita — odgovorim, kakor hitro uspem.",
+    "Česar tu ni, razložim po e-pošti ali na kratkem klicu — brez obveznosti in brez pritiska.",
   /** Po uspešnem oddaji obrazca */
   formSuccess: "Hvala — odgovorim, kakor hitro uspem.",
 } as const;

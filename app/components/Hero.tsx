@@ -35,17 +35,17 @@ export default function Hero() {
             Orkestru Slovenske filharmonije.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4 animate-fade-up delay-300">
+          <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4 animate-fade-up delay-300">
             <a
               href="#kontakt"
-              className="group inline-flex items-center gap-2 rounded-full bg-burgundy px-6 py-3.5 text-sm font-medium text-ivory shadow-[var(--shadow-card)] transition hover:bg-burgundy-deep"
+              className="group inline-flex min-h-[48px] min-w-[44px] items-center justify-center gap-2 rounded-full bg-burgundy px-6 py-3.5 text-sm font-medium text-ivory shadow-[var(--shadow-card)] transition hover:bg-burgundy-deep focus-visible:outline-offset-4"
             >
               Pošljita povpraševanje
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
               href="#nastopi"
-              className="group inline-flex items-center gap-2 rounded-full border border-charcoal/15 bg-ivory/70 px-6 py-3.5 text-sm font-medium text-charcoal backdrop-blur transition hover:border-burgundy/40 hover:text-burgundy"
+              className="group inline-flex min-h-[48px] min-w-[44px] items-center justify-center gap-2 rounded-full border border-charcoal/15 bg-ivory/70 px-6 py-3.5 text-sm font-medium text-charcoal backdrop-blur transition hover:border-burgundy/40 hover:text-burgundy focus-visible:outline-offset-4"
             >
               <span className="grid h-6 w-6 place-items-center rounded-full bg-burgundy text-ivory transition group-hover:scale-110">
                 <Play className="h-3 w-3 translate-x-px" />
@@ -54,12 +54,12 @@ export default function Hero() {
             </a>
           </div>
 
-          <dl className="mt-12 grid grid-cols-3 gap-6 max-w-xl animate-fade-up delay-400">
+          <dl className="mt-12 grid max-w-xl grid-cols-3 gap-3 sm:gap-6 animate-fade-up delay-400">
             <div className="flex flex-col">
               <dt className="text-[10px] uppercase tracking-[0.28em] text-gold-deep">
                 Izkušnje
               </dt>
-              <dd className="heading-display mt-1 text-3xl text-charcoal md:text-4xl">
+              <dd className="heading-display mt-1 text-2xl text-charcoal sm:text-3xl md:text-4xl">
                 Dolgoletne
               </dd>
               <span className="mt-1 text-xs text-charcoal/60">
@@ -70,7 +70,7 @@ export default function Hero() {
               <dt className="text-[10px] uppercase tracking-[0.28em] text-gold-deep">
                 Filharmonija
               </dt>
-              <dd className="heading-display mt-1 text-3xl text-charcoal md:text-4xl">
+              <dd className="heading-display mt-1 text-2xl text-charcoal sm:text-3xl md:text-4xl">
                 8 let
               </dd>
               <span className="mt-1 text-xs text-charcoal/60">Orkester SF</span>
@@ -79,7 +79,7 @@ export default function Hero() {
               <dt className="text-[10px] uppercase tracking-[0.28em] text-gold-deep">
                 Pokritost
               </dt>
-              <dd className="heading-display mt-1 text-3xl text-charcoal md:text-4xl">
+              <dd className="heading-display mt-1 text-2xl text-charcoal sm:text-3xl md:text-4xl">
                 SI &amp; EU
               </dd>
               <span className="mt-1 text-xs text-charcoal/60">
@@ -88,19 +88,24 @@ export default function Hero() {
             </div>
           </dl>
 
-          <div className="mt-8 flex items-center gap-4 animate-fade-up delay-500">
-            <div className="flex items-center gap-1 text-gold">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-3.5 w-3.5" />
-              ))}
-              <span className="ml-1 text-xs font-medium text-charcoal">
-                5,0
+          <div className="mt-6 animate-fade-up delay-500">
+            <a
+              href="#mnenja"
+              className="group inline-flex max-w-xl flex-wrap items-center gap-x-4 gap-y-2 rounded-2xl px-3 py-2 text-charcoal/75 transition hover:bg-charcoal/[0.04] hover:text-charcoal md:-mx-3 md:px-3"
+            >
+              <span className="flex items-center gap-1 text-gold">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-3.5 w-3.5" />
+                ))}
+                <span className="ml-1 text-xs font-medium text-charcoal">
+                  5,0
+                </span>
               </span>
-            </div>
-            <span className="h-3 w-px bg-charcoal/15" />
-            <span className="text-xs text-charcoal/60">
-              Stotine očaranih parov po Sloveniji
-            </span>
+              <span className="hidden h-3 w-px bg-charcoal/15 sm:inline" aria-hidden />
+              <span className="text-xs leading-snug text-charcoal/60 underline-offset-2 group-hover:text-burgundy group-hover:underline">
+                Stotine očaranih parov — preberita mnenja
+              </span>
+            </a>
           </div>
         </div>
 

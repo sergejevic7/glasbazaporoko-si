@@ -18,6 +18,7 @@ const NAV = [
   { href: "#proces", label: "Proces" },
   { href: "#mnenja", label: "Mnenja" },
   { href: "#pogosta-vprasanja", label: "FAQ" },
+  { href: "#rezerviraj-term", label: "Rezervacija" },
   { href: "#kontakt", label: "Kontakt" },
 ];
 
