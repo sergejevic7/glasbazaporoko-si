@@ -63,7 +63,6 @@ export default function SiteHeader() {
         <Link
           href={siteHomeHref(pathname)}
           className="group flex items-center gap-3 rounded-xl py-1 focus-visible:outline-offset-4"
-          aria-label="Glasba za poroko – domov"
         >
           <span
             aria-hidden
@@ -79,6 +78,7 @@ export default function SiteHeader() {
               Barbara Zalaznik · Violina
             </span>
           </span>
+          <span className="sr-only"> – domov</span>
         </Link>
 
         <nav className="hidden items-center gap-4 xl:gap-8 lg:flex" aria-label="Glavni meni">

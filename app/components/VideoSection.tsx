@@ -64,13 +64,6 @@ export default function VideoSection() {
           {VIDEOS.map((v, i) => {
             const canEmbed = Boolean(v.youtubeId || v.localFile);
             const isExternal = !canEmbed && Boolean(v.externalLink);
-            const aria =
-              isExternal
-                ? `Odpri ${v.title} v novem zavihku`
-                : canEmbed
-                  ? `Predvajaj video: ${v.title}`
-                  : v.title;
-
             const inner = (
               <>
                 <div className="flex items-center justify-between">
@@ -79,7 +72,10 @@ export default function VideoSection() {
                   </span>
                   <span className="grid h-12 w-12 place-items-center rounded-full bg-ivory text-burgundy shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] transition group-hover:scale-110">
                     {isExternal ? (
-                      <ArrowRight className="h-4 w-4" />
+                      <>
+                        <ArrowRight className="h-4 w-4" />
+                        <span className="sr-only">(odpre v novem zavihku)</span>
+                      </>
                     ) : (
                       <Play className="h-4 w-4 translate-x-[1px]" />
                     )}
@@ -117,7 +113,6 @@ export default function VideoSection() {
                     href={v.externalLink}
                     target="_blank"
                     rel="noreferrer noopener"
-                    aria-label={aria}
                     className="absolute inset-0 flex flex-col justify-between p-6 text-left"
                   >
                     {inner}
@@ -126,7 +121,6 @@ export default function VideoSection() {
                   <button
                     type="button"
                     onClick={() => canEmbed && setActive(i)}
-                    aria-label={aria}
                     className="absolute inset-0 flex flex-col justify-between p-6 text-left"
                   >
                     {inner}

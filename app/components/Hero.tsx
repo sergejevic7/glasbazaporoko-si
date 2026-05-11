@@ -62,9 +62,9 @@ export default function Hero() {
               <dd className="heading-display mt-1 text-2xl text-charcoal sm:text-3xl md:text-4xl">
                 Dolgoletne
               </dd>
-              <span className="mt-1 text-xs text-charcoal/60">
+              <dd className="mt-1 text-xs text-charcoal/60">
                 na odrih
-              </span>
+              </dd>
             </div>
             <div className="flex flex-col">
               <dt className="text-[10px] uppercase tracking-[0.28em] text-gold-deep">
@@ -73,7 +73,7 @@ export default function Hero() {
               <dd className="heading-display mt-1 text-2xl text-charcoal sm:text-3xl md:text-4xl">
                 8 let
               </dd>
-              <span className="mt-1 text-xs text-charcoal/60">Orkester SF</span>
+              <dd className="mt-1 text-xs text-charcoal/60">Orkester SF</dd>
             </div>
             <div className="flex flex-col">
               <dt className="text-[10px] uppercase tracking-[0.28em] text-gold-deep">
@@ -82,9 +82,9 @@ export default function Hero() {
               <dd className="heading-display mt-1 text-2xl text-charcoal sm:text-3xl md:text-4xl">
                 SI &amp; EU
               </dd>
-              <span className="mt-1 text-xs text-charcoal/60">
+              <dd className="mt-1 text-xs text-charcoal/60">
                 vsa Slovenija
-              </span>
+              </dd>
             </div>
           </dl>
 

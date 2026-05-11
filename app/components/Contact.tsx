@@ -115,7 +115,7 @@ export default function Contact() {
               </li>
             </ul>
 
-            <p className="mt-10 text-xs text-charcoal/55">
+            <p className="mt-10 text-xs text-charcoal/70">
               Vsa povpraševanja so brez obveznosti. Vajini podatki ostanejo
               zaupni in se ne posredujejo tretjim osebam.
             </p>
