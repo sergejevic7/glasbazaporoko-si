@@ -8,7 +8,6 @@ import {
 } from "../actions/contact";
 import {
   CONTACT_EMAIL_DISPLAY,
-  INQUIRY_SERVICE_OPTIONS,
   PHONE_DISPLAY,
   PHONE_TEL,
   RESPONSE_COPY,
@@ -200,50 +199,6 @@ export default function Contact() {
                   className="sm:col-span-2"
                   disabled={isPending}
                 />
-
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="serviceType"
-                    className="text-[10px] uppercase tracking-[0.28em] text-gold-deep"
-                  >
-                    Vrsta storitve{" "}
-                    <span className="text-burgundy" aria-hidden="true">
-                      *
-                    </span>
-                  </label>
-                  <select
-                    id="serviceType"
-                    name="serviceType"
-                    required
-                    disabled={isPending}
-                    aria-invalid={Boolean(fieldError("serviceType"))}
-                    aria-describedby={
-                      fieldError("serviceType")
-                        ? "serviceType-error"
-                        : undefined
-                    }
-                    defaultValue=""
-                    className={inputClass(Boolean(fieldError("serviceType")))}
-                  >
-                    <option value="" disabled>
-                      Izberite storitev …
-                    </option>
-                    {INQUIRY_SERVICE_OPTIONS.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                  {fieldError("serviceType") ? (
-                    <p
-                      id="serviceType-error"
-                      className="mt-1.5 text-sm text-burgundy-deep"
-                      role="alert"
-                    >
-                      {fieldError("serviceType")}
-                    </p>
-                  ) : null}
-                </div>
 
                 <div className="sm:col-span-2">
                   <label

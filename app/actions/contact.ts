@@ -1,10 +1,6 @@
 "use server";
 
 import { Resend } from "resend";
-import {
-  INQUIRY_SERVICE_OPTIONS,
-  type InquiryServiceOption,
-} from "../lib/contact";
 
 export type ContactField =
   | "name"
@@ -12,7 +8,6 @@ export type ContactField =
   | "phone"
   | "weddingDate"
   | "weddingLocation"
-  | "serviceType"
   | "message";
 
 export type ContactFormState = {
@@ -31,10 +26,6 @@ function escapeHtml(text: string): string {
     .replace(/"/g, "&quot;");
 }
 
-function isServiceOption(v: string): v is InquiryServiceOption {
-  return (INQUIRY_SERVICE_OPTIONS as readonly string[]).includes(v);
-}
-
 export async function submitContactForm(
   _prev: ContactFormState,
   formData: FormData,
@@ -49,7 +40,6 @@ export async function submitContactForm(
   const phone = String(formData.get("phone") ?? "").trim();
   const weddingDate = String(formData.get("weddingDate") ?? "").trim();
   const weddingLocation = String(formData.get("weddingLocation") ?? "").trim();
-  const serviceType = String(formData.get("serviceType") ?? "").trim();
   const message = String(formData.get("message") ?? "").trim();
 
   const errors: Partial<Record<ContactField, string>> = {};
@@ -60,9 +50,6 @@ export async function submitContactForm(
   if (!phone) errors.phone = "Vnesite telefonsko številko.";
   if (!weddingDate) errors.weddingDate = "Izberite datum poroke.";
   if (!weddingLocation) errors.weddingLocation = "Vnesite lokacijo poroke.";
-  if (!serviceType) errors.serviceType = "Izberite vrsto storitve.";
-  else if (!isServiceOption(serviceType))
-    errors.serviceType = "Neveljavna izbira storitve.";
   if (!message) errors.message = "Napišite kratko sporočilo.";
 
   if (Object.keys(errors).length > 0) {
@@ -104,7 +91,6 @@ export async function submitContactForm(
     `Telefon: ${phone}`,
     `Datum poroke: ${weddingDate}`,
     `Lokacija poroke: ${weddingLocation}`,
-    `Storitev: ${serviceType}`,
     "",
     "Sporočilo:",
     message,
@@ -121,7 +107,6 @@ export async function submitContactForm(
     ["Telefon", phone],
     ["Datum poroke", weddingDate],
     ["Lokacija poroke", weddingLocation],
-    ["Izbrana storitev", serviceType],
     ["Sporočilo", message],
     ["Vir", "Kontaktni obrazec — glasbazaporoko.si"],
     ["Čas oddaje (ISO)", submittedAtIso],
