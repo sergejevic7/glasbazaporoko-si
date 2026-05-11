@@ -14,7 +14,7 @@ export default function CookieConsentBanner() {
       aria-modal="false"
       aria-labelledby="cookie-banner-title"
       aria-describedby="cookie-banner-desc"
-      className="fixed inset-x-0 bottom-0 z-[100] border-t border-bone/80 bg-ivory/98 p-4 shadow-[0_-12px_40px_-12px_rgba(26,20,16,0.2)] backdrop-blur-md md:p-6"
+      className="fixed inset-x-0 bottom-0 z-[100] border-t border-bone/80 bg-ivory p-4 shadow-[0_-12px_40px_-12px_rgba(26,20,16,0.2)] md:p-6"
     >
       <div className="container-tight flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
         <div className="max-w-3xl">
