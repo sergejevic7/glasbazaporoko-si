@@ -2,12 +2,12 @@ import { GALLERY } from "../lib/media";
 import MediaImage from "./MediaImage";
 
 const TILES = [
-  { moment: "Vstop neveste", venue: "Cerkev sv. Jakoba, Ljubljana", span: "lg:col-span-2 lg:row-span-2 aspect-[4/5]" },
+  { moment: "Cerkveni obred", venue: "Zgodovinska kapela", span: "lg:col-span-2 lg:row-span-2 aspect-[4/5]" },
   { moment: "Civilni obred", venue: "Zunanja poroka", span: "aspect-square" },
-  { moment: "Sprejem svatov", venue: "Električna violina", span: "aspect-square" },
-  { moment: "Prvi ples", venue: "Grad Mokrice", span: "lg:col-span-2 aspect-[4/3]" },
-  { moment: "Električni show", venue: "Poročni obred", span: "aspect-square" },
-  { moment: "Sprejem svatov", venue: "Hotel Kempinski", span: "aspect-square" },
+  { moment: "Sprejem svatov", venue: "Luksuzni hotel", span: "aspect-square" },
+  { moment: "Nastop", venue: "Grand Hotel Bled", span: "lg:col-span-2 aspect-[4/3]" },
+  { moment: "Električni show", venue: "Velika Planina", span: "aspect-square" },
+  { moment: "Poročni vrt", venue: "Vrtno prizorišče", span: "aspect-square" },
 ];
 
 const FALLBACKS = [

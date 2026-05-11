@@ -49,11 +49,11 @@ export const PORTRAIT: MediaAsset = {
 /** Gallery (6 tiles, in display order). */
 export const GALLERY: MediaAsset[] = [
   {
-    src: "/images/galerija-1-porocni-obred.jpg",
-    source: `${SRC}/2022/11/Poroka-violina-1.jpg`,
-    alt: "Glasba za poročni obred v cerkvi — poročni nastop violinistke in poročna glasba",
-    width: 1079,
-    height: 577,
+    src: "/images/galerija-cerkveni-obred.jpg",
+    source: "",
+    alt: "Glasba za cerkveni poročni obred — violinistka med nastopom v zgodovinski kapeli",
+    width: 1600,
+    height: 1200,
   },
   {
     src: "/images/galerija-civilni-obred-vrt.jpg",
@@ -63,32 +63,32 @@ export const GALLERY: MediaAsset[] = [
     height: 1080,
   },
   {
-    src: "/images/galerija-sprejem-elektricna.jpg",
+    src: "/images/galerija-hotel-lobby.jpg",
     source: "",
-    alt: "Sprejem svatov z električno violino — glasba za poroko in poročna glasba na terasi",
+    alt: "Glasba za sprejem v luksuznem hotelu — violinistka med sprejemom svatov v elegantnem prostoru",
     width: 1600,
-    height: 1074,
+    height: 1200,
   },
   {
-    src: "/images/galerija-4-prvi-ples.jpg",
-    source: `${SRC}/2022/11/glasba-za-poroko-17.jpg`,
-    alt: "Prvi ples — poročni nastop z violino; glasbenik za poroko in poročna glasba za slavje",
-    width: 1024,
-    height: 683,
-  },
-  {
-    src: "/images/galerija-elektricni-show.jpg",
+    src: "/images/galerija-grand-hotel-bled.jpg",
     source: "",
-    alt: "Električna violina na poročnem obredu — dinamičen električni show in glasba za poroko",
+    alt: "Nastop violinistke v parku Grand Hotela Bled — glasba za poroko na premijskem slovenskem prizorišču",
     width: 1600,
-    height: 1076,
+    height: 1200,
   },
   {
-    src: "/images/galerija-6-poroka.jpg",
-    source: `${SRC}/2022/11/glasba-na-poroki-14.jpg`,
-    alt: "Poroka v Sloveniji — glasba za poroko z violino v živo",
-    width: 1024,
-    height: 683,
+    src: "/images/galerija-elektricni-show-planina.jpg",
+    source: "",
+    alt: "Električna violina na Veliki Planini — edinstven električni show violinistke pod dramatičnim nebom",
+    width: 1600,
+    height: 1200,
+  },
+  {
+    src: "/images/galerija-vrtna-poroka.jpg",
+    source: "",
+    alt: "Glasba za poroko v vrtnem prizorišču — violinistka med nastopom med cvetočimi vrtnicami",
+    width: 1600,
+    height: 1200,
   },
 ];
 
@@ -109,11 +109,11 @@ export const VIDEO_POSTERS: MediaAsset[] = [
     height: 1080,
   },
   {
-    src: "/images/nastop-3.webp",
-    source: `${SRC}/2022/11/Barbara-Zalaznik-Matos-glasba-na-poroki.webp`,
-    alt: "Električna violina za prvi ples — poročni nastop in glasba za poroko",
-    width: 1000,
-    height: 1154,
+    src: "/images/nastop-6.jpg",
+    source: "",
+    alt: "Violinistka med nastopom v elegantni poročni dvorani — glasba za poroko in slavje",
+    width: 1600,
+    height: 1200,
   },
 ];
 
