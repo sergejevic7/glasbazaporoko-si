@@ -190,6 +190,18 @@ main section[id] {
   animation: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Transform-only variant: element is visible (opacity 1) from the start
+   so the browser counts it as an LCP candidate immediately after CSS loads.
+   Use this for above-the-fold headings where LCP matters. */
+.animate-slide-up {
+  animation: slide-up 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes slide-up {
+  from { transform: translateY(14px); }
+  to   { transform: translateY(0); }
+}
+
 .animate-fade-in {
   animation: fade-in 1.1s ease-out both;
 }

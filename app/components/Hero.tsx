@@ -21,7 +21,7 @@ export default function Hero() {
             <span className="eyebrow">Vrhunska violinistka za poroko</span>
           </div>
 
-          <h1 className="heading-display mt-6 text-[clamp(2.6rem,6.4vw,5rem)] text-charcoal animate-fade-up delay-100">
+          <h1 className="heading-display mt-6 text-[clamp(2.6rem,6.4vw,5rem)] text-charcoal animate-slide-up delay-100">
             Glasba, ki <em className="not-italic text-burgundy">spremeni</em>
             <br />
             vajin trenutek <span className="italic text-gold-deep">»da«</span>{" "}
