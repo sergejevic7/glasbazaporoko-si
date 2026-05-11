@@ -11,6 +11,7 @@ import {
   SITE_BUSINESS_NAME,
   SITE_URL,
 } from "./lib/site";
+import { PHONE_TEL } from "./lib/contact";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -140,6 +141,7 @@ const jsonLd = {
       "@id": `${SITE_URL}#musicgroup`,
       name: SITE_BUSINESS_NAME,
       url: SITE_URL,
+      image: `${SITE_URL}${OG_IMAGE_PATH}`,
       genre: ["Wedding", "Classical", "Crossover", "Pop", "Film score"],
       member: {
         "@type": "Person",
@@ -168,6 +170,7 @@ const jsonLd = {
       "@id": `${SITE_URL}#localbusiness`,
       name: SITE_BUSINESS_NAME,
       url: SITE_URL,
+      telephone: PHONE_TEL,
       description: SITE_DESCRIPTION,
       image: `${SITE_URL}${OG_IMAGE_PATH}`,
       areaServed: {
