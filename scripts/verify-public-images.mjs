@@ -13,7 +13,7 @@ const IMG_DIR = join(ROOT, "public", "images");
 const PUB_DIR = join(ROOT, "public");
 
 const IMAGE_FILES = [
-  "hero-glasba-za-poroko.jpg",
+  "hero-barbara-zalaznik.jpg",
   "barbara-zalaznik-portret.jpg",
   "galerija-1-porocni-obred.jpg",
   "galerija-2-civilni-obred.jpg",

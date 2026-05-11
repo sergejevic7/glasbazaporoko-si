@@ -28,13 +28,13 @@ export type MediaAsset = {
 
 const SRC = "https://www.glasbazaporoko.si/wp-content/uploads";
 
-/** Hero — main visual on the right of the fold. */
+/** Hero — glavna vizualna fotografija desno (lokalna datoteka, brez WordPress hotlink). */
 export const HERO: MediaAsset = {
-  src: "/images/hero-glasba-za-poroko.jpg",
-  source: `${SRC}/2022/11/Barbara-Zalaznik-Matos-glasba-na-poroki-1.jpg`,
-  alt: "Barbara Zalaznik — violinistka in glasbenik za poroko pri poročnem nastopu; glasba za poroko in poročna glasba v živo",
+  src: "/images/hero-barbara-zalaznik.jpg",
+  source: "local/upload",
+  alt: "Barbara Zalaznik pri nastopu z violino — violinistka in premium poročna glasba za poroko; glasba za poroko v živo",
   width: 1066,
-  height: 1515,
+  height: 1600,
 };
 
 /** About — Barbara portrait. */

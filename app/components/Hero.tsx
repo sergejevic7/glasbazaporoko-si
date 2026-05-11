@@ -1,6 +1,6 @@
 import { HERO } from "../lib/media";
 import { ArrowRight, Play, Star } from "./Icons";
-import MediaImage from "./MediaImage";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -109,29 +109,37 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right visual — REAL image from glasbazaporoko.si */}
+        {/* Right visual — lokalna fotografija; width/height na Image za CLS */}
         <div className="relative lg:col-span-5">
-          <MediaImage
-            asset={HERO}
-            priority
-            sizes="(min-width: 1024px) min(38vw, 520px), min(92vw, 560px)"
-            fallbackClassName="bg-gradient-to-br from-burgundy-deep via-burgundy to-charcoal"
-            className="relative aspect-[4/5] w-full rounded-[2rem] shadow-[0_40px_80px_-30px_rgba(72,26,41,0.55)] ring-1 ring-bone/40"
-          />
+          <div className="relative w-full overflow-hidden rounded-[2rem] shadow-[0_40px_80px_-30px_rgba(72,26,41,0.55)] ring-1 ring-bone/40">
+            <Image
+              src={HERO.src}
+              alt={HERO.alt}
+              width={HERO.width ?? 1066}
+              height={HERO.height ?? 1600}
+              sizes="(min-width: 1024px) min(38vw, 520px), (min-width: 768px) min(44vw, 420px), min(92vw, 560px)"
+              priority
+              fetchPriority="high"
+              quality={84}
+              placeholder="empty"
+              decoding="async"
+              className="relative z-0 block h-auto w-full object-cover object-[center_22%]"
+            />
 
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 rounded-[2rem] bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
-          />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-[1] rounded-[2rem] bg-gradient-to-t from-charcoal/70 via-transparent to-transparent"
+            />
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 md:p-8">
-            <div className="rounded-2xl bg-charcoal/55 p-4 ring-1 ring-ivory/15">
-              <p className="heading-display text-xl text-ivory md:text-2xl">
-                &ldquo;Igram tako, kot začutim vajino zgodbo.&rdquo;
-              </p>
-              <p className="mt-2 text-xs uppercase tracking-[0.28em] text-champagne">
-                Barbara Zalaznik
-              </p>
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] p-6 md:p-8">
+              <div className="rounded-2xl bg-charcoal/55 p-4 ring-1 ring-ivory/15">
+                <p className="heading-display text-xl text-ivory md:text-2xl">
+                  &ldquo;Igram tako, kot začutim vajino zgodbo.&rdquo;
+                </p>
+                <p className="mt-2 text-xs uppercase tracking-[0.28em] text-champagne">
+                  Barbara Zalaznik
+                </p>
+              </div>
             </div>
           </div>
         </div>

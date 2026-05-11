@@ -23,7 +23,7 @@ spodnji tabeli — kód je nanj že vezana.
 
 | Lokalna pot | Vir (klikni za prenos) | Uporabljeno v |
 | --- | --- | --- |
-| `hero-glasba-za-poroko.jpg` | https://www.glasbazaporoko.si/wp-content/uploads/2022/11/Barbara-Zalaznik-Matos-glasba-na-poroki-1.jpg | Hero — glavna vizualna fotografija desno |
+| `hero-barbara-zalaznik.jpg` | (lokalna naložba, brez WP URL) | Hero — glavna vizualna fotografija desno |
 | `barbara-zalaznik-portret.jpg` | https://www.glasbazaporoko.si/wp-content/uploads/2022/11/glasba-na-poroki-barbara.jpg | Sekcija „O meni" — portret |
 | `galerija-1-porocni-obred.jpg` | https://www.glasbazaporoko.si/wp-content/uploads/2022/11/Poroka-violina-1.jpg | Galerija — velika ploščica |
 | `galerija-2-civilni-obred.jpg` | https://www.glasbazaporoko.si/wp-content/uploads/2022/11/glasba-na-poroki-12.jpg | Galerija |

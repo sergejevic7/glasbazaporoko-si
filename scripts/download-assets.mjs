@@ -26,11 +26,7 @@ const SRC = "https://www.glasbazaporoko.si/wp-content/uploads";
 
 /** Keep this in sync with app/lib/media.ts */
 const ASSETS = [
-  // Hero
-  {
-    url: `${SRC}/2022/11/Barbara-Zalaznik-Matos-glasba-na-poroki-1.jpg`,
-    file: "hero-glasba-za-poroko.jpg",
-  },
+  // Hero — local file `hero-barbara-zalaznik.jpg` (see app/lib/media.ts HERO.source)
   // About / portrait
   {
     url: `${SRC}/2022/11/glasba-na-poroki-barbara.jpg`,
