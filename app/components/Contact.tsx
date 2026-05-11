@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useActionState, useEffect, useRef } from "react";
 import {
   submitContactForm,
@@ -279,65 +278,6 @@ export default function Contact() {
                     </p>
                   ) : null}
                 </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <div
-                  className={`flex gap-3 rounded-2xl border bg-cream/45 p-4 ring-1 ${
-                    fieldError("privacyConsent")
-                      ? "border-rose/60 ring-rose/25"
-                      : "border-bone/70 ring-bone/50"
-                  }`}
-                >
-                  <input
-                    id="privacyConsent"
-                    name="privacyConsent"
-                    type="checkbox"
-                    required
-                    disabled={isPending}
-                    value="on"
-                    aria-invalid={Boolean(fieldError("privacyConsent"))}
-                    aria-describedby={
-                      fieldError("privacyConsent")
-                        ? "privacyConsent-error"
-                        : undefined
-                    }
-                    className="mt-1 h-4 w-4 shrink-0 accent-burgundy"
-                  />
-                  <label
-                    htmlFor="privacyConsent"
-                    className="text-sm leading-relaxed text-charcoal/85"
-                  >
-                    Ob oddaji soglašam z obdelavo osebnih podatkov za namen
-                    obravnave povpraševanja in priprave ponudbe, kot je opisano
-                    v{" "}
-                    <Link
-                      href="/zasebnost"
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="font-medium text-burgundy underline decoration-burgundy/35 underline-offset-2 hover:decoration-burgundy"
-                    >
-                      politiki zasebnosti
-                    </Link>
-                    . Označeno je lahko prekličete tako, da nam pišete na{" "}
-                    <a
-                      href={`mailto:${CONTACT_EMAIL_DISPLAY}`}
-                      className="font-medium text-burgundy underline decoration-burgundy/35 underline-offset-2"
-                    >
-                      {CONTACT_EMAIL_DISPLAY}
-                    </a>
-                    .
-                  </label>
-                </div>
-                {fieldError("privacyConsent") ? (
-                  <p
-                    id="privacyConsent-error"
-                    className="mt-2 text-sm text-burgundy-deep"
-                    role="alert"
-                  >
-                    {fieldError("privacyConsent")}
-                  </p>
-                ) : null}
               </div>
 
               <div className="flex flex-col gap-4 border-t border-bone/60 pt-6 sm:flex-row sm:items-center sm:justify-between">

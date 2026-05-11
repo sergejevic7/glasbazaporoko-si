@@ -13,8 +13,7 @@ export type ContactField =
   | "weddingDate"
   | "weddingLocation"
   | "serviceType"
-  | "message"
-  | "privacyConsent";
+  | "message";
 
 export type ContactFormState = {
   ok: boolean;
@@ -45,12 +44,6 @@ export async function submitContactForm(
     return { ok: true };
   }
 
-  const privacyConsent = formData.get("privacyConsent");
-  const privacyOk =
-    privacyConsent === "on" ||
-    privacyConsent === "true" ||
-    String(privacyConsent ?? "").toLowerCase() === "yes";
-
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const phone = String(formData.get("phone") ?? "").trim();
@@ -60,11 +53,6 @@ export async function submitContactForm(
   const message = String(formData.get("message") ?? "").trim();
 
   const errors: Partial<Record<ContactField, string>> = {};
-
-  if (!privacyOk) {
-    errors.privacyConsent =
-      "Za oddajo povpraševanja potrdite seznanitev s politiko zasebnosti.";
-  }
 
   if (!name) errors.name = "Vnesite ime in priimek.";
   if (!email) errors.email = "Vnesite e-poštni naslov.";
@@ -121,7 +109,7 @@ export async function submitContactForm(
     "Sporočilo:",
     message,
     "",
-    "Privolitev za obdelavo osebnih podatkov (politika zasebnosti): Da",
+    "Vir: kontaktni obrazec na glasbazaporoko.si",
     "",
     `Čas oddaje (ISO): ${submittedAtIso}`,
     `Čas oddaje (Slovenija): ${submittedAtLocal}`,
@@ -135,10 +123,7 @@ export async function submitContactForm(
     ["Lokacija poroke", weddingLocation],
     ["Izbrana storitev", serviceType],
     ["Sporočilo", message],
-    [
-      "Privolitev za obdelavo podatkov (politika zasebnosti)",
-      "Da — potrjeno ob oddaji obrazca",
-    ],
+    ["Vir", "Kontaktni obrazec — glasbazaporoko.si"],
     ["Čas oddaje (ISO)", submittedAtIso],
     ["Čas oddaje (Slovenija)", submittedAtLocal],
   ]
