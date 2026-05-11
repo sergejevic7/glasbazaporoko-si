@@ -3,10 +3,10 @@ import MediaImage from "./MediaImage";
 
 const TILES = [
   { moment: "Vstop neveste", venue: "Cerkev sv. Jakoba, Ljubljana", span: "lg:col-span-2 lg:row-span-2 aspect-[4/5]" },
-  { moment: "Civilni obred", venue: "Vila Bled", span: "aspect-square" },
-  { moment: "Sprejem svatov", venue: "Posestvo Pule", span: "aspect-square" },
+  { moment: "Civilni obred", venue: "Zunanja poroka", span: "aspect-square" },
+  { moment: "Sprejem svatov", venue: "Električna violina", span: "aspect-square" },
   { moment: "Prvi ples", venue: "Grad Mokrice", span: "lg:col-span-2 aspect-[4/3]" },
-  { moment: "Električni show", venue: "Otvoritveni gala", span: "aspect-square" },
+  { moment: "Električni show", venue: "Poročni obred", span: "aspect-square" },
   { moment: "Sprejem svatov", venue: "Hotel Kempinski", span: "aspect-square" },
 ];
 
