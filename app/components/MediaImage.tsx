@@ -49,7 +49,7 @@ export default function MediaImage({
 
   return (
     <div
-      className={`relative isolate overflow-hidden ${className}`}
+      className={`isolate overflow-hidden ${className}`}
       data-asset={asset.src}
     >
       <span
