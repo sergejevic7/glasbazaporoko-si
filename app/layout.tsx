@@ -1,9 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import CookieConsentBanner from "./components/CookieConsentBanner";
-import GatedGoogleAnalytics from "./components/GatedGoogleAnalytics";
+import dynamic from "next/dynamic";
 import SkipToMain from "./components/SkipToMain";
 import { CookieConsentProvider } from "./context/CookieConsentContext";
+
+const CookieConsentBanner = dynamic(
+  () => import("./components/CookieConsentBanner"),
+  { ssr: false }
+);
+const GatedGoogleAnalytics = dynamic(
+  () => import("./components/GatedGoogleAnalytics"),
+  { ssr: false }
+);
 import {
   OG_IMAGE_ALT,
   OG_IMAGE_PATH,
