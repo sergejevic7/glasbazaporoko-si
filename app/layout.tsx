@@ -1,17 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import dynamic from "next/dynamic";
+import ConsentLayer from "./components/ConsentLayer";
 import SkipToMain from "./components/SkipToMain";
 import { CookieConsentProvider } from "./context/CookieConsentContext";
-
-const CookieConsentBanner = dynamic(
-  () => import("./components/CookieConsentBanner"),
-  { ssr: false }
-);
-const GatedGoogleAnalytics = dynamic(
-  () => import("./components/GatedGoogleAnalytics"),
-  { ssr: false }
-);
 import {
   OG_IMAGE_ALT,
   OG_IMAGE_PATH,
@@ -261,8 +252,7 @@ export default function RootLayout({
         <SkipToMain />
         <CookieConsentProvider>
           {children}
-          <CookieConsentBanner />
-          <GatedGoogleAnalytics />
+          <ConsentLayer />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
