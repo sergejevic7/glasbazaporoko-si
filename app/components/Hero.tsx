@@ -116,7 +116,7 @@ export default function Hero() {
             priority
             sizes="(min-width: 1024px) min(38vw, 520px), min(92vw, 560px)"
             fallbackClassName="bg-gradient-to-br from-burgundy-deep via-burgundy to-charcoal"
-            className="relative aspect-[4/5] w-full rounded-[2rem] shadow-[0_40px_80px_-30px_rgba(72,26,41,0.55)] animate-fade-in ring-1 ring-bone/40"
+            className="relative aspect-[4/5] w-full rounded-[2rem] shadow-[0_40px_80px_-30px_rgba(72,26,41,0.55)] ring-1 ring-bone/40"
           />
 
           <div

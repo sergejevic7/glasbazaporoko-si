@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import Script from "next/script";
 import CookieConsentBanner from "./components/CookieConsentBanner";
 import GatedGoogleAnalytics from "./components/GatedGoogleAnalytics";
 import SkipToMain from "./components/SkipToMain";
@@ -65,7 +64,10 @@ export const metadata: Metadata = {
   /** Absolutna baza za OG/Twitter slike in naslove (`/og-image.jpg` → www.glasbazaporoko.si). */
   metadataBase: new URL("https://www.glasbazaporoko.si"),
   icons: {
-    icon: [{ url: "/icon.png", sizes: "512x512", type: "image/png" }],
+    icon: [
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   title: {
@@ -250,13 +252,10 @@ export default function RootLayout({
           {children}
           <CookieConsentBanner />
           <GatedGoogleAnalytics />
-          <Script
-            id="ld-json"
+          <script
             type="application/ld+json"
-            strategy="beforeInteractive"
-          >
-            {JSON.stringify(jsonLd)}
-          </Script>
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
         </CookieConsentProvider>
       </body>
     </html>
