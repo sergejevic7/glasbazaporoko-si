@@ -45,7 +45,7 @@ export default function Hero() {
             </a>
             <a
               href="#nastopi"
-              className="group inline-flex min-h-[48px] min-w-[44px] items-center justify-center gap-2 rounded-full border border-charcoal/15 bg-ivory/70 px-6 py-3.5 text-sm font-medium text-charcoal backdrop-blur transition hover:border-burgundy/40 hover:text-burgundy focus-visible:outline-offset-4"
+              className="group inline-flex min-h-[48px] min-w-[44px] items-center justify-center gap-2 rounded-full border border-charcoal/15 bg-ivory/85 px-6 py-3.5 text-sm font-medium text-charcoal transition hover:border-burgundy/40 hover:text-burgundy focus-visible:outline-offset-4"
             >
               <span className="grid h-6 w-6 place-items-center rounded-full bg-burgundy text-ivory transition group-hover:scale-110">
                 <Play className="h-3 w-3 translate-x-px" />
@@ -125,7 +125,7 @@ export default function Hero() {
           />
 
           <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 md:p-8">
-            <div className="rounded-2xl bg-charcoal/30 p-4 backdrop-blur-md ring-1 ring-ivory/15">
+            <div className="rounded-2xl bg-charcoal/55 p-4 ring-1 ring-ivory/15">
               <p className="heading-display text-xl text-ivory md:text-2xl">
                 &ldquo;Igram tako, kot začutim vajino zgodbo.&rdquo;
               </p>
