@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "verify:assets": "node scripts/verify-public-images.mjs",
+    "prebuild": "node scripts/verify-public-images.mjs",
     "download:assets": "node scripts/download-assets.mjs",
     "vercel:deploy": "npx vercel deploy --prod"
   },
