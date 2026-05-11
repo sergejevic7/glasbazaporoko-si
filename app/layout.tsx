@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
-import ConsentLayer from "./components/ConsentLayer";
+import CookieConsentBanner from "./components/CookieConsentBanner";
+import GatedGoogleAnalytics from "./components/GatedGoogleAnalytics";
 import SkipToMain from "./components/SkipToMain";
 import { CookieConsentProvider } from "./context/CookieConsentContext";
 import {
@@ -252,7 +253,8 @@ export default function RootLayout({
         <SkipToMain />
         <CookieConsentProvider>
           {children}
-          <ConsentLayer />
+          <CookieConsentBanner />
+          <GatedGoogleAnalytics />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
