@@ -17,13 +17,13 @@ const display = Cormorant_Garamond({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
-  display: "swap",
+  display: "optional",
 });
 
 const body = Inter({
   variable: "--font-body",
   subsets: ["latin", "latin-ext"],
-  display: "swap",
+  display: "optional",
 });
 
 /** Primarni SEO naslov (Google SERP + zavihek brskalnika). */
