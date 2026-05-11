@@ -1,6 +1,33 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        // OG image: 7-day cache so social crawlers can reliably display it.
+        // must-revalidate (Vercel default) causes Last-Modified to return the
+        // request time on each hit, making crawlers treat the file as constantly
+        // changing and skip displaying the image.
+        source: "/og-image.jpg",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
+        // apple-icon and favicon are versioned by content — long cache is safe.
+        source: "/:file(apple-icon\\.png|favicon-32\\.png|icon\\.png)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=86400",
+          },
+        ],
+      },
+    ];
+  },
   images: {
     /**
      * Next 16 defaults to qualities: [75] only. `next/image` requests with other
