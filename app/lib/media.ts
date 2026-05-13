@@ -50,8 +50,8 @@ export const PORTRAIT: MediaAsset = {
 export const GALLERY: MediaAsset[] = [
   {
     src: "/images/galerija-cerkveni-obred.jpg",
-    source: "",
-    alt: "Glasba za cerkveni poročni obred — violinistka med nastopom v zgodovinski kapeli",
+    source: "local/upload",
+    alt: "Glasba za cerkveni poročni obred — violinistka z violino v modri obleki med nastopom v cerkveni kapeli",
     width: 1600,
     height: 1200,
   },
