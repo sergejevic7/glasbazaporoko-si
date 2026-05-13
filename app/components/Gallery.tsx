@@ -5,7 +5,7 @@ const TILES = [
   { moment: "Cerkveni obred", venue: "Zgodovinska kapela", span: "lg:col-span-2 lg:row-span-2 aspect-[4/5]" },
   { moment: "Civilni obred", venue: "Zunanja poroka", span: "aspect-square" },
   { moment: "Sprejem svatov", venue: "Luksuzni hotel", span: "aspect-square" },
-  { moment: "Nastop", venue: "Grand Hotel Bled", span: "lg:col-span-2 aspect-[4/3]" },
+  { moment: "Nastop", venue: "Grand Hotel Palace Portorož", span: "lg:col-span-2 aspect-[4/3]" },
   { moment: "Električni show", venue: "Velika Planina", span: "aspect-square" },
   { moment: "Poročni vrt", venue: "Vrtno prizorišče", span: "aspect-square" },
 ];

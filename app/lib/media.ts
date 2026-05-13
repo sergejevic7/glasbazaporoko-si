@@ -72,7 +72,7 @@ export const GALLERY: MediaAsset[] = [
   {
     src: "/images/galerija-grand-hotel-bled.jpg",
     source: "",
-    alt: "Nastop violinistke v parku Grand Hotela Bled — glasba za poroko na premijskem slovenskem prizorišču",
+    alt: "Nastop violinistke v Grand Hotel Palace Portorož — glasba za poroko na premijskem slovenskem prizorišču",
     width: 1600,
     height: 1200,
   },
