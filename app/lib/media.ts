@@ -96,10 +96,10 @@ export const GALLERY: MediaAsset[] = [
 export const VIDEO_POSTERS: MediaAsset[] = [
   {
     src: "/images/nastop-4.jpg",
-    source: "",
-    alt: "Poročni nastop z električno violino — glasba za poroko in civilni obred na prostem",
-    width: 1600,
-    height: 1076,
+    source: "local/upload",
+    alt: "Violinski nastop iz repertoarja — violinistka v rožnati obleki z električno violino pred zgodovinsko graščino; glasba za poroko",
+    width: 1277,
+    height: 1600,
   },
   {
     src: "/images/nastop-5.jpg",
